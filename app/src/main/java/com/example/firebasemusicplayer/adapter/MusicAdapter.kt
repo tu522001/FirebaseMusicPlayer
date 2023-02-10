@@ -89,11 +89,11 @@ class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.
 
     override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
         val music: Music = musicList!![position] ?: return
-        holder.tv_id.text = "MaSV: " + music.id
-        holder.tv_songName.text = "Hoten: " + music.songName
-        holder.tv_singerName.text = "Email: " + music.singerName
-        holder.tv_imageURL.text = "GioiTinh: " + music.imageURL
-        holder.tv_songURL.text = "Diem: " + music.songURL
+        holder.tv_id.text = "id: " + music.id
+        holder.tv_songName.text = "songName: " + music.songName
+        holder.tv_singerName.text = "singerName: " + music.singerName
+        holder.tv_imageURL.text = "imageURL: " + music.imageURL
+        holder.tv_songURL.text = "songURL: " + music.songURL
         //        holder.imageView.setImageResource(Integer.parseInt("Image: "+sinhVien.getImage()));
 //        Picasso.with(holder.imageView.context).load(musicList[position].getImage())
 //            .into(holder.imageView)

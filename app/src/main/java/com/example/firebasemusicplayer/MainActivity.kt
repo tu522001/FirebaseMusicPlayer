@@ -45,6 +45,45 @@ class MainActivity : AppCompatActivity() {
         recyclerView?.adapter = musicAdapter
         onItemClick()
 
+
+
+        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                musicList!!.clear()
+                return if (newText == "") {
+                    getListUsersFromRealTimeDatabase()
+                    true
+                } else {
+                    search(newText)
+                    true
+                }
+            }
+        })
+    }
+
+    private fun search(s: String) {
+        //Search for users with name equal to "email"
+        val query = myRef!!.orderByChild("songName").equalTo(s)
+
+//Add a listener to the query
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                musicList!!.clear()
+                for (userSnapshot in dataSnapshot.children) {
+                    val music: Music? = userSnapshot.getValue(Music::class.java)
+                    musicList!!.add(music!!)
+                }
+                musicAdapter!!.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("FirebaseSearch", "Error while searching: " + databaseError.message)
+            }
+        })
     }
 
     private fun init() {
@@ -91,6 +130,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 
 }
 
