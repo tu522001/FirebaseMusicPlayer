@@ -15,6 +15,11 @@ import com.example.firebasemusicplayer.model.Music
 import com.google.firebase.database.*
 import java.io.IOException
 
+/**
+ *
+ * MainActivity
+ *
+ * */
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private var myRef: DatabaseReference? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,18 +44,19 @@ class MainActivity : AppCompatActivity() {
         // DividerItemDecoration là một lớp trong Android cung cấp cách để vẽ một chia cách giữa các item trong RecyclerView
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         recyclerView?.addItemDecoration(dividerItemDecoration)
+
         musicList = ArrayList<Music>()
         musicAdapter = MusicAdapter(musicList)
         recyclerView?.adapter = musicAdapter
         onItemClick()
 
-
-
         searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
 
+            // onQueryTextChange được gọi mỗi khi nội dung trong thanh tìm kiếm thay đổi.
             override fun onQueryTextChange(newText: String): Boolean {
                 musicList!!.clear()
                 return if (newText == "") {
@@ -65,12 +70,20 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /**      Search with attribute "songName" **/
     private fun search(s: String) {
-        //Search for users with name equal to "email"
-        val query = myRef!!.orderByChild("songName").equalTo(s)
+//       code chưa tối ưu
+//       val query = myRef!!.orderByChild("songName").equalTo(s)
+
+//      code tối ưu
+        val query = myRef?.let { ref ->
+            ref.orderByChild("songName")
+                .equalTo(s) // tạo ra 1 khối ref xong trong khối ấy sử dụng các function or method
+        }
 
 //Add a listener to the query
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
+        query?.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 musicList!!.clear()
                 for (userSnapshot in dataSnapshot.children) {
@@ -84,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("FirebaseSearch", "Error while searching: " + databaseError.message)
             }
         })
+
     }
 
     private fun init() {
@@ -91,13 +105,16 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
     }
 
+
     private fun getListUsersFromRealTimeDatabase() {
         database = FirebaseDatabase.getInstance()
         myRef = database!!.getReference("Singer")
+
         myRef!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot in snapshot.children) {
                     music = dataSnapshot.getValue(Music::class.java)
+                    Log.d("AAA",""+music)
                     musicList?.add(music!!)
                 }
                 musicAdapter?.notifyDataSetChanged()
@@ -129,8 +146,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
 
+//        Log.d("VAO","0+VAO")
+    }
 
 
 }

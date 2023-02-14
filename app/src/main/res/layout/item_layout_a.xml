@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="90dp"
     android:weightSum="2"
     android:id="@+id/item_layout_rc">
 
 
     <ImageView
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="50dp"
         android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/soobin" />
 
     <LinearLayout
-        android:layout_width="310dp"
+        android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,30 +30,35 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="ID :" />
 
         <TextView
+            android:layout_marginTop="20dp"
             android:id="@+id/tv_songName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Song Name :" />
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/tv_singerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Singer Name :" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_imageURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_songURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

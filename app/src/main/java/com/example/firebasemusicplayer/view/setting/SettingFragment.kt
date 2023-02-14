@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.ui.setting
+package com.example.firebasemusicplayer.view.setting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
