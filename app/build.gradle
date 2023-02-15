@@ -41,6 +41,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures{
+        dataBinding true
+        viewBinding true
+    }
 
 
 }
@@ -61,17 +65,20 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
 
     // Picasso
-//    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Glide Image
     implementation 'com.github.bumptech.glide:glide:4.14.2'
 
-    // ViewModel
-//    implementation "androidx.lifecycle:lifecycle-extensions:2.4.0"
-
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // bo góc Image bằng cách sử dụng thư viện Cardview
+    //implementation "androidx.cardview:cardview:1.0.0"
+
+    // bo góc Image bằng cách sử dụng thư viện CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 
 }

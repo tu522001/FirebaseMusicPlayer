@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.firebasemusicplayer.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_screenFragment"
+            app:destination="@id/screenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/screenFragment"
+        android:name="com.example.firebasemusicplayer.view.home.ScreenFragment"
+        android:label="fragment_screen"
+        tools:layout="@layout/fragment_screen" />
 </navigation>
