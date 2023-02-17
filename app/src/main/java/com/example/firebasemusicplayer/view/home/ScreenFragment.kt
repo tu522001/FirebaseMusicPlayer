@@ -12,17 +12,18 @@ import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.model.Music
+import kotlinx.android.synthetic.main.fragment_screen.*
 import java.io.IOException
 
 
 class ScreenFragment : Fragment() {
 
-    private var number: Int? = null
+    private var number: Int = 0
     private var mediaPlayer: MediaPlayer? = null
     private var musicList: ArrayList<Music>? = null
+    private var music: Music? = null
 
-    //    private var music: Music? = null
-//
+    //
 //    private var database: FirebaseDatabase? = null
 //    private var myRef: DatabaseReference? = null
     private lateinit var binding: FragmentScreenBinding
@@ -66,7 +67,7 @@ class ScreenFragment : Fragment() {
     private fun onClickPosition() {
         // Lấy position trong RecyclerView
         val bundle = arguments
-        number = bundle?.getInt("Key_position")
+        number = bundle?.getInt("Key_position")!!
         Log.d("AAAS", "Position : " + number)
     }
 
@@ -94,10 +95,15 @@ class ScreenFragment : Fragment() {
         realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
             onSuccess = { musicList ->
 
+                music = musicList.get(number!!)
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
 
-                //Button Play
+                // Khai báo biến để lưu trạng thái đang phát nhạc
+                var isPlaying = false
+
+
+//Button Play
                 binding.btnPlay.setOnClickListener {
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
@@ -132,13 +138,58 @@ class ScreenFragment : Fragment() {
                     }
                 }
 
-                // Button Stop
-                binding.btnStop.setOnClickListener{
-                    mediaPlayer!!.stop()
-                    mediaPlayer!!.release()
+
+// Button Stop
+                binding.btnStop.setOnClickListener {
+                    if (mediaPlayer!!.isPlaying) {
+                        mediaPlayer!!.stop()
+                        mediaPlayer!!.prepare()
+                    }
                 }
 
 
+// Button Next
+                binding.btnNext.setOnClickListener {
+                    if (number!! >= musicList.size - 1) {
+                        number = 0
+                    } else {
+                        number++
+                    }
+                    music = musicList.get(number!!)
+
+                    // xử lý sự kiện để không bị hát trồng lên nhau
+                    if (mediaPlayer!!.isPlaying) {
+                        mediaPlayer!!.stop()
+                    }
+                    mediaPlayer!!.reset()
+                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
+                    mediaPlayer!!.prepare()
+                    mediaPlayer!!.start()
+                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
+                    binding.btnPlay.setImageResource(R.drawable.ic_pause)
+                }
+
+
+// Button Previous
+                binding.btnPrevious.setOnClickListener{
+                    if (number!! <= 0) {
+                        number = musicList.size - 1
+                    } else {
+                        number--
+                    }
+                    music = musicList.get(number!!)
+
+                    // xử lý sự kiện để không bị hát trồng lên nhau
+                    if (mediaPlayer!!.isPlaying) {
+                        mediaPlayer!!.stop()
+                    }
+                    mediaPlayer!!.reset()
+                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
+                    mediaPlayer!!.prepare()
+                    mediaPlayer!!.start()
+                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
+                    binding.btnPlay.setImageResource(R.drawable.ic_pause)
+                }
 
                 Log.d("EEE", "ScreenFragment arrayList : " + musicList!!.size)
             },
@@ -170,48 +221,5 @@ class ScreenFragment : Fragment() {
 //        }
 //    }
 
-    // button Stop
-    private fun onClickStopButton() {
-        binding.btnStop.setOnClickListener {
-////            ACTION_STOP
-//            Log.d("SSS", "Stop : Vào")
-//
-////            imageView2.clearAnimation()
-//            mediaPlayer!!.stop()
-//            mediaPlayer!!.release()
-////            btn_play.setImageResource(R.drawable.ic_play)
-////            khoiTao()
-//            btn_play.setImageResource(R.drawable.ic_play)
-        }
-    }
-
-    // button Skip
-    private fun onClickSkipButton() {
-        binding.btnSkip.setOnClickListener {
-//            ACTION_SKIP
-            Log.d("SSS", "Skip : Vào")
-        }
-    }
-
-    // button Previous
-    private fun onClickPreviousButton() {
-        binding.btnPrevious.setOnClickListener {
-//            ACTION_PREVIOUS
-            Log.d("SSS", "Previous : Vào")
-        }
-    }
-
-//    private fun handleClickMusic() {
-////        var i = null
-//        when (i) {
-//            1 -> onClickPlayrButton()
-//            2 -> onClickSkipButton()
-//            3 -> onClickStopButton()
-//            4 -> onClickPreviousButton()
-//            else -> {
-//
-//            }
-//        }
-//    }
 
 }
