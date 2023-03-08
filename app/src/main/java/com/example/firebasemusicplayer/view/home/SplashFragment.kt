@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.databinding.FragmentHomeBinding
 import com.example.firebasemusicplayer.databinding.FragmentSplashBinding
+import com.example.firebasemusicplayer.view.home.SplashFragment
+
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SplashFragment : Fragment() {
 
@@ -31,12 +33,18 @@ class SplashFragment : Fragment() {
 
         handler.postDelayed({
             navigateToSignIn()
-        }, 5000)
+        }, 2000)
 
         return binding.root
     }
 
     private fun navigateToSignIn() {
-        findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null){
+            findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+        }else{
+//            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+        }
     }
 }

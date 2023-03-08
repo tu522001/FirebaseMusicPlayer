@@ -5,41 +5,39 @@
     tools:context=".login.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="50dp"
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="20dp"
             android:ems="10"
-            android:hint="Last name"
+            android:hint="Name"
             android:inputType="textPersonName"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName4"
-
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:id="@+id/edt_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -51,11 +49,16 @@
             android:phoneNumber="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_name" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
-
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:id="@+id/edt_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -66,11 +69,16 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName6"
-
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -81,21 +89,27 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_age" />
 
         <EditText
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:hint="Password"
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
         <Button
             android:layout_marginTop="30dp"
@@ -105,7 +119,7 @@
             android:text="confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
