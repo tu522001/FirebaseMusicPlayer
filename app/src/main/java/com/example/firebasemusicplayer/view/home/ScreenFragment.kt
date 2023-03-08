@@ -90,13 +90,13 @@ class ScreenFragment : Fragment() {
 //Button Play
                 binding.btnPlay.setOnClickListener {
 
-                    capNhatTimeBaiHat()
+//                    capNhatTimeBaiHat()
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
                         mediaPlayer!!.pause()
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
-                        displayTextView()
+//                        displayTextView()
 
                         /**
                          *   (+) "mediaPlayer!!.currentPosition" : là vị trí hiện tại của mediaPlayer trong quá trình phát nhạc, tính bằng mili giây (ms).
@@ -124,8 +124,8 @@ class ScreenFragment : Fragment() {
                             }
                         }
                         binding.btnPlay.setImageResource(R.drawable.ic_pause)
-                        SetTimeTotal()
-                        capNhatTimeBaiHat()
+//                        SetTimeTotal()
+//                        capNhatTimeBaiHat()
                     }
                 }
 
