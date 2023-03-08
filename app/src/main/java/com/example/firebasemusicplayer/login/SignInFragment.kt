@@ -15,6 +15,7 @@ import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSignInBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import kotlinx.android.synthetic.main.fragment_sign_in.view.*
 
 
 class SignInFragment : Fragment() {
@@ -35,16 +36,13 @@ class SignInFragment : Fragment() {
         clickSignUp()
 
         mAuth = FirebaseAuth.getInstance()
-        binding.loginbtn.setOnClickListener{
-            loginUser();
+        binding.loginbtn.setOnClickListener {
+            loginUser(emails.text.toString(), passwords.text.toString());
         }
         return binding.root
     }
 
-    private fun loginUser() {
-        val email: String = emails.getText().toString()
-        val password: String = passwords.getText().toString()
-
+    private fun loginUser(email: String, password: String) {
         if (TextUtils.isEmpty(email)) {
             emails.setError("Email cannot be empty")
             emails.requestFocus()
@@ -54,13 +52,15 @@ class SignInFragment : Fragment() {
         } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "User logged in successfully",
+                    Toast.makeText(
+                        requireContext(), "User logged in successfully",
                         Toast.LENGTH_SHORT
                     )
                         .show()
                     findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
                 } else {
-                    Toast.makeText(requireContext(), "Log in Error: ",
+                    Toast.makeText(
+                        requireContext(), "Log in Error: ",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -69,7 +69,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun clickSignUp() {
-        binding.tvRegister.setOnClickListener{
+        binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
     }

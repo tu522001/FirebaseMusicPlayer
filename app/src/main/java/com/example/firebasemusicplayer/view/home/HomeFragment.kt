@@ -32,9 +32,11 @@ class HomeFragment : Fragment() {
     private var music: Music? = null
     private var database: FirebaseDatabase? = null
     private var myRef: DatabaseReference? = null
-//
+
+    //
     private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
-//    private val musicList: MutableList<Music> = mutableListOf()
+
+    //    private val musicList: MutableList<Music> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +62,7 @@ class HomeFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         recyclerView?.addItemDecoration(dividerItemDecoration)
         musicList = ArrayList<Music>()
-        Log.d("QQQ","arrayList"+ musicList!!.size)
+        Log.d("QQQ", "arrayList" + musicList!!.size)
         musicAdapter = MusicAdapter(musicList)
         recyclerView?.adapter = musicAdapter
 
@@ -75,7 +77,7 @@ class HomeFragment : Fragment() {
                 this.musicList?.clear()
                 this.musicList?.addAll(musicList)
                 musicAdapter?.notifyDataSetChanged()
-                Log.d("EEE","arrayList"+ musicList!!.size)
+                Log.d("EEE", "arrayList" + musicList!!.size)
 
             },
             onFailure = { exception ->
@@ -139,12 +141,13 @@ class HomeFragment : Fragment() {
 //                fragment.arguments = bundle
 
                 val bundle = Bundle().apply {
-                    putInt("Key_position",position)
+                    putInt("Key_position", position)
                 }
-                findNavController().navigate(R.id.action_homeFragment_to_screenFragment,bundle)
+                findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
 
 
             }
         })
     }
+
 }
