@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
@@ -23,6 +24,9 @@ import java.text.SimpleDateFormat
 class ScreenFragment : Fragment() {
 
     private var number: Int = 0
+    private lateinit var song_name : String
+    private lateinit var image_url : String
+
     private var mediaPlayer: MediaPlayer? = null
     private var music: Music? = null
     private lateinit var binding: FragmentScreenBinding
@@ -52,6 +56,10 @@ class ScreenFragment : Fragment() {
         // Lấy position trong RecyclerView
         val bundle = arguments
         number = bundle?.getInt("Key_position")!!
+        song_name = bundle?.getString("Key_song_name")!!
+        image_url = bundle?.getString("Key_imageURL")!!
+
+        Log.d("AAAS", "Position : " + number)
         Log.d("AAAS", "Position : " + number)
     }
 
@@ -62,7 +70,12 @@ class ScreenFragment : Fragment() {
                 music = musicList.get(number!!)
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-
+                // lấy dữ liệu tên bài hát từ HomeFragment sang ScreenFragment để hiển thị trên màn hình ScreenFragment
+                binding.tvSongName.text = song_name
+                // lấy dữ liệu hình ảnh từ HomeFragment sang ScreenFragment để hiển thị trên màn hình ScreenFragment
+                Glide.with(binding.imgSong)
+                    .load(image_url)
+                    .into(binding.imgSong)
 
                 // Khai báo biến để lưu trạng thái đang phát nhạc
                 var isRepeating = false
@@ -196,6 +209,7 @@ class ScreenFragment : Fragment() {
         // Hiển thị đi tvStartTime và  tvEndTime khi đang ở màn hình chờ ScreenFragment
         binding.tvStartTime.visibility = View.VISIBLE
         binding.tvEndTime.visibility = View.VISIBLE
+//        binding.tvSongName = song_name
     }
 
     private fun capNhatTimeBaiHat() {
@@ -223,7 +237,7 @@ class ScreenFragment : Fragment() {
                             // xử lý sự kiện để không bị hát trồng lên nhau
                             if (mediaPlayer!!.isPlaying) {
                                 mediaPlayer!!.stop()
-                                imageView2.clearAnimation()
+                                img_song.clearAnimation()
                             }
                             mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
                             mediaPlayer!!.start()

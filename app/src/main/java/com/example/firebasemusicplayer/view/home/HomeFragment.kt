@@ -130,8 +130,11 @@ class HomeFragment : Fragment() {
         // position bài hát để phát trong RecyclerView
         musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
             override fun onClick(position: Int) {
+                val music = musicList!![position]
                 val bundle = Bundle().apply {
                     putInt("Key_position", position)
+                    putString("Key_song_name", musicList!![position].songName)
+                    putString("Key_imageURL", musicList!![position].imageURL)
                 }
                 findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
 
