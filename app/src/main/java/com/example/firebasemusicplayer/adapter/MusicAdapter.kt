@@ -76,5 +76,6 @@ class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.
 
     interface OnItemClickListener {
         fun onClick(position: Int)
+//        fun songData(musicList: List<Music>?)
     }
 }

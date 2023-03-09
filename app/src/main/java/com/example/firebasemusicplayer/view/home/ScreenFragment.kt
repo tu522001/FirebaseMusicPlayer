@@ -55,26 +55,6 @@ class ScreenFragment : Fragment() {
         Log.d("AAAS", "Position : " + number)
     }
 
-//    private fun getListUsersFromRealTimeDatabase() {
-//        database = FirebaseDatabase.getInstance()
-//        myRef = database!!.getReference("Singer")
-//        myRef!!.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                for (dataSnapshot in snapshot.children) {
-//                    music = dataSnapshot.getValue(Music::class.java)
-//                    musicList?.add(music!!)
-//                }
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                Toast.makeText(context, "Get list users faild", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//
-//        Log.d("WWW", "ScreenFragment    database : " + database)
-//        Log.d("WWW", "ScreenFragment    myRef : " + myRef)
-//    }
-
     private fun doSomethingWithListUsers() {
         realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
             onSuccess = { musicList ->
@@ -90,13 +70,13 @@ class ScreenFragment : Fragment() {
 //Button Play
                 binding.btnPlay.setOnClickListener {
 
-//                    capNhatTimeBaiHat()
+                    capNhatTimeBaiHat()
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
                         mediaPlayer!!.pause()
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
-//                        displayTextView()
+                        displayTextView()
 
                         /**
                          *   (+) "mediaPlayer!!.currentPosition" : là vị trí hiện tại của mediaPlayer trong quá trình phát nhạc, tính bằng mili giây (ms).
@@ -124,8 +104,8 @@ class ScreenFragment : Fragment() {
                             }
                         }
                         binding.btnPlay.setImageResource(R.drawable.ic_pause)
-//                        SetTimeTotal()
-//                        capNhatTimeBaiHat()
+                        SetTimeTotal()
+                        capNhatTimeBaiHat()
                     }
                 }
 
@@ -163,7 +143,6 @@ class ScreenFragment : Fragment() {
                     SetTimeTotal()
                     capNhatTimeBaiHat()
                 }
-
 
 // Button Previous
                 binding.btnPrevious.setOnClickListener {
@@ -273,30 +252,5 @@ class ScreenFragment : Fragment() {
         // tức là gán max của skSong = mediaPlayer.getDuration()
         binding.seekBar.max = mediaPlayer!!.duration
     }
-
-
-
-    // button Play
-//    private fun onClickPlayrButton() {
-//        mediaPlayer = MediaPlayer()
-//        binding.btnPlay.setOnClickListener {
-////            ACTION_PLAY
-////            Log.d("ZZZ", "ScreenFragment    Position : " + number)
-////            Log.d("ZZZ", "ScreenFragment    songURL : " + musicList!!.get(number!!).songURL)
-//
-////            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
-////                mediaPlayer!!.stop()
-////                mediaPlayer!!.reset()
-////            }
-//            try {
-//                mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-//                mediaPlayer!!.setOnPreparedListener(MediaPlayer.OnPreparedListener { mediaPlayer -> mediaPlayer.start() })
-//                mediaPlayer!!.prepare()
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
-
 
 }

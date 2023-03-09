@@ -29,14 +29,11 @@ class HomeFragment : Fragment() {
     private var searchView: SearchView? = null
     private var musicAdapter: MusicAdapter? = null
     private var musicList: ArrayList<Music>? = null
-    private var music: Music? = null
     private var database: FirebaseDatabase? = null
     private var myRef: DatabaseReference? = null
 
-    //
     private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
 
-    //    private val musicList: MutableList<Music> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -127,26 +124,6 @@ class HomeFragment : Fragment() {
             }
         )
     }
-//    private fun getListUsersFromRealTimeDatabase() {
-//        database = FirebaseDatabase.getInstance()
-//        myRef = database!!.getReference("Singer")
-//        myRef!!.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                for (dataSnapshot in snapshot.children) {
-//                    music = dataSnapshot.getValue(Music::class.java)
-//                    musicList?.add(music!!)
-//                }
-//                musicAdapter?.notifyDataSetChanged()
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                Toast.makeText(context, "Get list users faild", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//
-//        Log.d("WWW", "HomeFramgne    database : " + database)
-//        Log.d("WWW", "HomeFramgne    myRef : " + myRef)
-//    }
 
     // hàm xử lý sự kiện click vào các item ở trong recyclerView để phát nhạc
     private fun onItemClick() {
@@ -162,80 +139,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-}
 
-//    private lateinit var binding: FragmentHomeBinding
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var searchView: SearchView
-//    private lateinit var musicAdapter: MusicAdapter
-//    private lateinit var musicList: MutableList<Music>
-//    private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        binding = FragmentHomeBinding.inflate(inflater, container, false)
-//
-//        recyclerView = binding.recyclerView
-//        searchView = binding.searchView
-//
-//        realtimeDatabaseHelper = RealtimeDatabaseHelper()
-//        musicList = mutableListOf()
-//        musicAdapter = MusicAdapter(musicList)
-//        recyclerView.adapter = musicAdapter
-//
-//        val linearLayoutManager = LinearLayoutManager(context)
-//        recyclerView.layoutManager = linearLayoutManager
-//
-//        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-//        recyclerView.addItemDecoration(dividerItemDecoration)
-//
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                if (newText.isNullOrEmpty()) {
-//                    getListUsers()
-//                } else {
-//                    search(newText.toLowerCase())
-//                }
-//                return true
-//            }
-//        })
-//
-//        getListUsers()
-//
-//        return binding.root
-//    }
-//
-//    private fun getListUsers() {
-//        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
-//            onSuccess = { musicList ->
-//                // Update UI with musicList
-//                this.musicList.clear()
-//                this.musicList.addAll(musicList)
-//                musicAdapter.notifyDataSetChanged()
-//            },
-//            onFailure = { exception ->
-//                // Handle exception
-//            }
-//        )
-//    }
-//
-//    private fun search(query: String) {
-//        realtimeDatabaseHelper.searchUsersFromRealTimeDatabase(
-//            query = query,
-//            onSuccess = { musicList ->
-//                this.musicList.clear()
-//                this.musicList.addAll(musicList)
-//                musicAdapter.notifyDataSetChanged()
-//            },
-//            onFailure = { exception ->
-//                // Handle exception
-//            }
-//        )
-//    }
-//}
+
+}
