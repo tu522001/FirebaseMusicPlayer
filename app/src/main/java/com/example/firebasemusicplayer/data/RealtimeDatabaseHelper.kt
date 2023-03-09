@@ -30,3 +30,58 @@ class RealtimeDatabaseHelper {
         })
     }
 }
+//class RealtimeDatabaseHelper {
+//    private val database = FirebaseDatabase.getInstance()
+//    private val myRef = database.getReference("Singer")
+//
+//    // callback
+//    fun getListUsersFromRealTimeDatabase(
+//        onSuccess: (List<Music>) -> Unit,
+//        onFailure: (Exception) -> Unit
+//    ) {
+//        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val musicList = mutableListOf<Music>()
+//                for (dataSnapshot in snapshot.children) {
+//                    val music = dataSnapshot.getValue(Music::class.java)
+//                    music?.let {
+//                        musicList.add(it)
+//                    }
+//                }
+//                onSuccess(musicList)
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                onFailure(error.toException())
+//            }
+//        })
+//    }
+//
+//    fun searchUsersFromRealTimeDatabase(
+//        query: String,
+//        onSuccess: (List<Music>) -> Unit,
+//        onFailure: (Exception) -> Unit
+//    ) {
+//        val musicList = mutableListOf<Music>()
+//
+//        val queryRef = myRef.orderByChild("songName")
+//            .startAt(query)
+//            .endAt("$query\uf8ff")
+//
+//        queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                for (ds in snapshot.children) {
+//                    val music = ds.getValue(Music::class.java)
+//                    music?.let {
+//                        musicList.add(it)
+//                    }
+//                }
+//                onSuccess(musicList)
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                onFailure(error.toException())
+//            }
+//        })
+//    }
+//}

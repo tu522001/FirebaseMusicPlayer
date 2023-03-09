@@ -53,7 +53,9 @@ class HomeFragment : Fragment() {
         recyclerView = binding.recyclerView.findViewById(R.id.recyclerView)
 
         realtimeDatabaseHelper = RealtimeDatabaseHelper()
-//        getListUsersFromRealTimeDatabase()
+        database = FirebaseDatabase.getInstance()
+        myRef = database?.getReference("Singer")
+
         getListUsers()
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView?.layoutManager = linearLayoutManager
@@ -67,9 +69,49 @@ class HomeFragment : Fragment() {
         recyclerView?.adapter = musicAdapter
 
         onItemClick()
+
+                searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            // onQueryTextChange được gọi mỗi khi nội dung trong thanh tìm kiếm thay đổi.
+            override fun onQueryTextChange(newText: String): Boolean {
+                musicList!!.clear()
+                return if (newText.isEmpty()) {
+                    getListUsers()
+                    true
+                } else {
+                    search(newText)
+                    true
+                }
+            }
+        })
         return binding.root
     }
 
+    private fun search(query: String) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Singer")
+
+        databaseReference.orderByChild("songName")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    musicList!!.clear()
+                    for (postSnapshot in snapshot.children) {
+                        val music = postSnapshot.getValue(Music::class.java)
+                        musicList!!.add(music!!)
+                    }
+                    musicAdapter!!.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e("DDD", "onCancelled", databaseError.toException())
+                }
+            })
+    }
     private fun getListUsers() {
         realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
             onSuccess = { musicList ->
@@ -111,35 +153,6 @@ class HomeFragment : Fragment() {
         // position bài hát để phát trong RecyclerView
         musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
             override fun onClick(position: Int) {
-//                    mediaPlayer = MediaPlayer()
-                Log.d("BBB", "" + position)
-
-                Log.d("ZZZ", "HomeFramgne    Position : " + position)
-                Log.d("ZZZ", "HomeFramgnet   songURL : " + musicList!!.get(position!!).songURL)
-//                    if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
-//                        mediaPlayer!!.stop()
-//                        mediaPlayer!!.reset()
-//                    }
-//                    try {
-//                        mediaPlayer!!.setDataSource(musicList!!.get(position).songURL)
-//                        mediaPlayer!!.setOnPreparedListener(MediaPlayer.OnPreparedListener { mediaPlayer -> mediaPlayer.start() })
-//                        mediaPlayer!!.prepare()
-//                    } catch (e: IOException) {
-//                        e.printStackTrace()
-//                    }
-
-//                    findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
-//                    findNavController().navigate(R.id.action_homeFragment_to_screenFragment)
-
-//                findNavController().navigate(R.id.action_homeFragment_to_screenFragment)
-//
-//                //            Truyền dữ liệu theo Bundle
-//                val bundle = Bundle().apply {
-//                    putInt("position", position)
-//                }
-//                val fragment = ScreenFragment()
-//                fragment.arguments = bundle
-
                 val bundle = Bundle().apply {
                     putInt("Key_position", position)
                 }
@@ -149,5 +162,80 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 }
+
+//    private lateinit var binding: FragmentHomeBinding
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var searchView: SearchView
+//    private lateinit var musicAdapter: MusicAdapter
+//    private lateinit var musicList: MutableList<Music>
+//    private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        binding = FragmentHomeBinding.inflate(inflater, container, false)
+//
+//        recyclerView = binding.recyclerView
+//        searchView = binding.searchView
+//
+//        realtimeDatabaseHelper = RealtimeDatabaseHelper()
+//        musicList = mutableListOf()
+//        musicAdapter = MusicAdapter(musicList)
+//        recyclerView.adapter = musicAdapter
+//
+//        val linearLayoutManager = LinearLayoutManager(context)
+//        recyclerView.layoutManager = linearLayoutManager
+//
+//        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+//        recyclerView.addItemDecoration(dividerItemDecoration)
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                if (newText.isNullOrEmpty()) {
+//                    getListUsers()
+//                } else {
+//                    search(newText.toLowerCase())
+//                }
+//                return true
+//            }
+//        })
+//
+//        getListUsers()
+//
+//        return binding.root
+//    }
+//
+//    private fun getListUsers() {
+//        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
+//            onSuccess = { musicList ->
+//                // Update UI with musicList
+//                this.musicList.clear()
+//                this.musicList.addAll(musicList)
+//                musicAdapter.notifyDataSetChanged()
+//            },
+//            onFailure = { exception ->
+//                // Handle exception
+//            }
+//        )
+//    }
+//
+//    private fun search(query: String) {
+//        realtimeDatabaseHelper.searchUsersFromRealTimeDatabase(
+//            query = query,
+//            onSuccess = { musicList ->
+//                this.musicList.clear()
+//                this.musicList.addAll(musicList)
+//                musicAdapter.notifyDataSetChanged()
+//            },
+//            onFailure = { exception ->
+//                // Handle exception
+//            }
+//        )
+//    }
+//}
