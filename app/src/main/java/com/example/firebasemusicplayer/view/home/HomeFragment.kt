@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
         realtimeDatabaseHelper = RealtimeDatabaseHelper()
         database = FirebaseDatabase.getInstance()
-        myRef = database?.getReference("Singer")
+        myRef = database?.getReference("Song")
 
         getListUsers()
         val linearLayoutManager = LinearLayoutManager(context)
@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun search(query: String) {
-        val databaseReference = FirebaseDatabase.getInstance().getReference("Singer")
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Song")
 
         databaseReference.orderByChild("songName")
             .startAt(query)

@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 
 class RealtimeDatabaseHelper {
     private val database = FirebaseDatabase.getInstance()
-    private val myRef = database.getReference("Singer")
+    private val myRef = database.getReference("Song")
 
     // callback
     fun getListUsersFromRealTimeDatabase(onSuccess: (List<Music>) -> Unit, onFailure: (Exception) -> Unit) {
