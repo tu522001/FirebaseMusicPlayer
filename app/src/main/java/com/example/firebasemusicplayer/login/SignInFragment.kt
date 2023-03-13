@@ -41,10 +41,10 @@ class SignInFragment : Fragment() {
 
         viewModel.isAuthenticated.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
-                Toast.makeText(
-                    requireContext(), "User logged in successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    requireContext(), "User logged in successfully",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
             } else {
                 Toast.makeText(

@@ -7,7 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.databinding.DataBindingUtil
@@ -94,14 +97,12 @@ class ScreenFragment : Fragment() {
                 // Code xử lý sau khi delay 3 giây
                 binding.btnPlay.setOnClickListener {
 
-                    capNhatTimeBaiHat()
+//                    capNhatTimeBaiHat()
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
                         mediaPlayer!!.pause()
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
-                        val animation = AnimationUtils.loadAnimation(context, R.anim.rotate_anim)
-                        binding.imgSong.startAnimation(animation)
                         displayTextView()
 
                         /**
@@ -135,42 +136,25 @@ class ScreenFragment : Fragment() {
                     }
                 }
 
+
 // Button Repeat
                 binding.btnRepeat.setOnClickListener {
-                    binding.btnRepeat.setOnClickListener {
+                    // Lấy giá trị hiện tại của tính năng lặp lại
+                    val isLooping = mediaPlayer!!.isLooping
+                    // Thiết lập tính năng lặp lại mới
+                    mediaPlayer!!.setLooping(!isLooping)
+                    // Thay đổi hình ảnh của nút Repeat để phản ánh trạng thái mới
+                    if (isLooping) {
+                        binding.btnRepeat.setImageResource(R.drawable.ic_repeat)
+                    } else {
                         binding.btnRepeat.setImageResource(R.drawable.ic_repeat_one)
-                        isRepeating = !isRepeating
-                        mediaPlayer!!.isLooping = isRepeating
                     }
                 }
 
 
 // Button Next
                 binding.btnNext.setOnClickListener {
-
-//                    if (number!! >= musicList.size - 1) {
-//                        number = 0
-//                        music = musicList.get(number!!)
-//                    } else {
-//                        number++
-//                    }
-//                    music = musicList.get(number!!)
-//
-//                    displayTextView()
-//                    // xử lý sự kiện để không bị hát trồng lên nhau
-//                    if (mediaPlayer!!.isPlaying) {
-//                        mediaPlayer!!.stop()
-//                    }
-//                    mediaPlayer!!.reset()
-//                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-//                    mediaPlayer!!.prepare()
-//                    mediaPlayer!!.start()
-//                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
-//                    binding.btnPlay.setImageResource(R.drawable.ic_pause)
-//                    SetTimeTotal()
-//                    capNhatTimeBaiHat()
-                    number =
-                        (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                    number = (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
                     music = musicList[number]
                     mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
                     mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
@@ -249,28 +233,28 @@ class ScreenFragment : Fragment() {
                 handler.postDelayed(object : Runnable {
                     override fun run() {
                         val dinhDangGio = SimpleDateFormat("mm:ss")
-                        binding.tvStartTime.setText(dinhDangGio.format(mediaPlayer!!.currentPosition))
+                        binding.tvStartTime.text = dinhDangGio.format(mediaPlayer?.currentPosition)
 
                         //update progress skSong
-                        binding.seekBar.progress = mediaPlayer!!.currentPosition
-
+                        mediaPlayer?.currentPosition?.let {
+                            binding.seekBar.progress = it
+                        }
 
                         //Kiểm tra thời gian bài hát -> nếu kết thúc  -> next
-                        mediaPlayer!!.setOnCompletionListener {
-                            if (number >= musicList.size - 1) {
-                                number = 0
-                                music = musicList.get(number)
-                            } else {
-                                number++
-                                music = musicList.get(number)
-                            }
-                            // xử lý sự kiện để không bị hát trồng lên nhau
-                            if (mediaPlayer!!.isPlaying) {
-                                mediaPlayer!!.stop()
-                                img_song.clearAnimation()
-                            }
-                            mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-                            mediaPlayer!!.start()
+                        mediaPlayer?.setOnCompletionListener {
+                            number = (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                            music = musicList[number]
+                            mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
+                            mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
+                            mediaPlayer!!.prepare() // Chuẩn bị MediaPlayer
+                            mediaPlayer!!.start() // Bắt đầu phát nhạc
+                            // Update thông tin trên giao diện
+                            binding.tvSongName.text = music!!.songName
+                            binding.tvSingerName.text = music!!.singerName
+                            Glide.with(binding.imgSong)
+                                .load(music!!.imageURL)
+                                .into(binding.imgSong)
+                            // Thay đổi trạng thái của nút play
                             binding.btnPlay.setImageResource(R.drawable.ic_pause)
                             SetTimeTotal()
                             capNhatTimeBaiHat()
@@ -282,8 +266,8 @@ class ScreenFragment : Fragment() {
                 Log.d("RRR", "musicList : " + musicList.size)
             },
             onFailure = { exception ->
-
-            },
+                // Xử lý exception tại đây
+            }
         )
     }
 
