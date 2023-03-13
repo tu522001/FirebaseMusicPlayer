@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
 
         handler.postDelayed({
             navigateToSignIn()
-        }, 2000)
+        }, 7000)
 
         return binding.root
     }

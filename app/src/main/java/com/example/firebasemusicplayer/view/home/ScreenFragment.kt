@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat
 
 class ScreenFragment : Fragment() {
 
+    private var count : Int = 0
     private var number: Int = 0
     private lateinit var song_name: String
     private lateinit var image_url: String
@@ -52,6 +53,15 @@ class ScreenFragment : Fragment() {
 //        binding.imgBtnLogoutHome.setOnClickListener{
 //            findNavController().navigate(R.id.action_screenFragment_to_homeFragment)
 //        }
+
+        binding.btnLike.setOnClickListener{
+            count++
+            if (count % 2 == 1){
+                binding.btnLike.setImageResource(R.drawable.ic_favorite)
+            }else{
+                binding.btnLike.setImageResource(R.drawable.ic_favorite_border)
+            }
+        }
 
         return binding.root
     }

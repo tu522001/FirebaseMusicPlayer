@@ -70,6 +70,7 @@ dependencies {
 
     // Glide Image
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -87,6 +88,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    // xem được ảnh GIF trong android
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
 
 
 }
