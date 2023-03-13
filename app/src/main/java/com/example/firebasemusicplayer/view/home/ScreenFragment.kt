@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.databinding.DataBindingUtil
@@ -20,7 +17,6 @@ import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.model.Music
-import kotlinx.android.synthetic.main.fragment_screen.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 
@@ -31,7 +27,6 @@ class ScreenFragment : Fragment() {
     private lateinit var song_name: String
     private lateinit var image_url: String
     private lateinit var singer_name: String
-    private var isRepeating = false // Khai báo biến để lưu trạng thái đang phát nhạc
     private var mediaPlayer: MediaPlayer? = null
     private var music: Music? = null
     private lateinit var binding: FragmentScreenBinding
@@ -53,6 +48,10 @@ class ScreenFragment : Fragment() {
         realtimeDatabaseHelper = RealtimeDatabaseHelper()
         doSomethingWithListUsers()
         onClickPosition()
+
+//        binding.imgBtnLogoutHome.setOnClickListener{
+//            findNavController().navigate(R.id.action_screenFragment_to_homeFragment)
+//        }
 
         return binding.root
     }
@@ -101,6 +100,7 @@ class ScreenFragment : Fragment() {
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
                         mediaPlayer!!.pause()
+                        stopAnimation()
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
                         displayTextView()
@@ -119,12 +119,14 @@ class ScreenFragment : Fragment() {
                         if (mediaPlayer!!.currentPosition > 0 && mediaPlayer!!.duration != mediaPlayer!!.currentPosition) {
                             // Đang tạm dừng -> tiếp tục phát
                             mediaPlayer!!.start()
+                            startAnimation()
                         } else {
                             // Đang dừng hoặc chưa bắt đầu -> bắt đầu phát
                             try {
                                 mediaPlayer!!.prepare()
                                 mediaPlayer!!.setOnPreparedListener(MediaPlayer.OnPreparedListener { mediaPlayer ->
                                     mediaPlayer!!.start()
+                                    startAnimation()
                                 })
                             } catch (e: IOException) {
                                 e.printStackTrace()
@@ -160,6 +162,7 @@ class ScreenFragment : Fragment() {
                     mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
                     mediaPlayer!!.prepare() // Chuẩn bị MediaPlayer
                     mediaPlayer!!.start() // Bắt đầu phát nhạc
+                    startAnimation()
                     // Update thông tin trên giao diện
                     binding.tvSongName.text = music!!.songName
                     binding.tvSingerName.text = music!!.singerName
@@ -175,13 +178,14 @@ class ScreenFragment : Fragment() {
 
 // Button Previous
                 binding.btnPrevious.setOnClickListener {
-                    number =
-                        (number - 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                    // Lấy vị trí phát tiếp theo trong danh sách
+                    number = (number - 1) % musicList.size
                     music = musicList[number]
                     mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
                     mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
                     mediaPlayer!!.prepare() // Chuẩn bị MediaPlayer
                     mediaPlayer!!.start() // Bắt đầu phát nhạc
+                    startAnimation()
                     // Update thông tin trên giao diện
                     binding.tvSongName.text = music!!.songName
                     binding.tvSingerName.text = music!!.singerName
@@ -219,11 +223,25 @@ class ScreenFragment : Fragment() {
         )
     }
 
+    private fun startAnimation() {
+        val runnable: Runnable = object : Runnable {
+            override fun run() {
+                binding.imgSong.animate().rotationBy(360f).withEndAction(this).setDuration(20000)
+                    .setInterpolator(LinearInterpolator()).start()
+            }
+        }
+        binding.imgSong.animate().rotationBy(360f).withEndAction(runnable).setDuration(20000)
+            .setInterpolator(LinearInterpolator()).start()
+    }
+
+    private fun stopAnimation() {
+        binding.imgSong.animate().cancel()
+    }
+
     private fun displayTextView() {
         // Hiển thị đi tvStartTime và  tvEndTime khi đang ở màn hình chờ ScreenFragment
         binding.tvStartTime.visibility = View.VISIBLE
         binding.tvEndTime.visibility = View.VISIBLE
-
     }
 
     private fun capNhatTimeBaiHat() {
