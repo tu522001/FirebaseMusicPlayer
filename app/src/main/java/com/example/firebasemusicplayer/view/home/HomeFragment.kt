@@ -134,7 +134,8 @@ class HomeFragment : Fragment() {
                 val bundle = Bundle().apply {
                     putInt("Key_position", position)
                     putString("Key_song_name", musicList!![position].songName)
-                    putString("Key_imageURL", musicList!![position].imageURL)
+                    putString("Key_image_URL", musicList!![position].imageURL)
+                    putString("Key_singer_name", musicList!![position].singerName)
                 }
                 findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
 

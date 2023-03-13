@@ -136,6 +136,10 @@ class SignUpFragment : Fragment() {
             signUpViewModel.signUp(email, password)
         }
 
+        binding.imgBtnLogout.setOnClickListener{
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+        }
+
         signUpViewModel.signUpSuccess.observe(viewLifecycleOwner, Observer {
             if (it) {
                 // Xác thực thành công

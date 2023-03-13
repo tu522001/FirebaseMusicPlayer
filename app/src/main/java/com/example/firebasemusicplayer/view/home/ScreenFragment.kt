@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.databinding.DataBindingUtil
@@ -24,9 +25,10 @@ import java.text.SimpleDateFormat
 class ScreenFragment : Fragment() {
 
     private var number: Int = 0
-    private lateinit var song_name : String
-    private lateinit var image_url : String
-
+    private lateinit var song_name: String
+    private lateinit var image_url: String
+    private lateinit var singer_name: String
+    private var isRepeating = false // Khai báo biến để lưu trạng thái đang phát nhạc
     private var mediaPlayer: MediaPlayer? = null
     private var music: Music? = null
     private lateinit var binding: FragmentScreenBinding
@@ -55,12 +57,19 @@ class ScreenFragment : Fragment() {
     private fun onClickPosition() {
         // Lấy position trong RecyclerView
         val bundle = arguments
-        number = bundle?.getInt("Key_position")!!
-        song_name = bundle?.getString("Key_song_name")!!
-        image_url = bundle?.getString("Key_imageURL")!!
 
-        Log.d("AAAS", "Position : " + number)
-        Log.d("AAAS", "Position : " + number)
+        // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
+        number = bundle?.getInt("Key_position")!!
+
+        // lấy dữ liệu songName từ HomeFramgent sang ScreenFragment
+        song_name = bundle?.getString("Key_song_name")!!
+
+        // lấy dữ liệu imageURL từ HomeFramgent sang ScreenFragment
+        image_url = bundle?.getString("Key_image_URL")!!
+
+        // lấy dữ liệu singerName từ HomeFramgent sang ScreenFragment
+        singer_name = bundle?.getString("Key_singer_name")!!
+
     }
 
     private fun doSomethingWithListUsers() {
@@ -70,17 +79,19 @@ class ScreenFragment : Fragment() {
                 music = musicList.get(number!!)
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-                // lấy dữ liệu tên bài hát từ HomeFragment sang ScreenFragment để hiển thị trên màn hình ScreenFragment
+
+                // hiển thị dữ liệu trên Song Name ra màn hình ScreenFragment
                 binding.tvSongName.text = song_name
-                // lấy dữ liệu hình ảnh từ HomeFragment sang ScreenFragment để hiển thị trên màn hình ScreenFragment
+                // hiển thị dữ liệu Singer Name ra màn hình ScreenFragment
+                binding.tvSingerName.text = singer_name
+                // hiển thị dữ liệu Image ra màn hình ScreenFragment
                 Glide.with(binding.imgSong)
                     .load(image_url)
                     .into(binding.imgSong)
 
-                // Khai báo biến để lưu trạng thái đang phát nhạc
-                var isRepeating = false
-
 //Button Play
+
+                // Code xử lý sau khi delay 3 giây
                 binding.btnPlay.setOnClickListener {
 
                     capNhatTimeBaiHat()
@@ -89,6 +100,8 @@ class ScreenFragment : Fragment() {
                         mediaPlayer!!.pause()
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
+                        val animation = AnimationUtils.loadAnimation(context, R.anim.rotate_anim)
+                        binding.imgSong.startAnimation(animation)
                         displayTextView()
 
                         /**
@@ -122,7 +135,6 @@ class ScreenFragment : Fragment() {
                     }
                 }
 
-
 // Button Repeat
                 binding.btnRepeat.setOnClickListener {
                     binding.btnRepeat.setOnClickListener {
@@ -135,48 +147,66 @@ class ScreenFragment : Fragment() {
 
 // Button Next
                 binding.btnNext.setOnClickListener {
-                    displayTextView()
-                    if (number!! >= musicList.size - 1) {
-                        number = 0
-                    } else {
-                        number++
-                    }
-                    music = musicList.get(number!!)
 
-                    // xử lý sự kiện để không bị hát trồng lên nhau
-                    if (mediaPlayer!!.isPlaying) {
-                        mediaPlayer!!.stop()
-                    }
-                    mediaPlayer!!.reset()
-                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-                    mediaPlayer!!.prepare()
-                    mediaPlayer!!.start()
-                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
+//                    if (number!! >= musicList.size - 1) {
+//                        number = 0
+//                        music = musicList.get(number!!)
+//                    } else {
+//                        number++
+//                    }
+//                    music = musicList.get(number!!)
+//
+//                    displayTextView()
+//                    // xử lý sự kiện để không bị hát trồng lên nhau
+//                    if (mediaPlayer!!.isPlaying) {
+//                        mediaPlayer!!.stop()
+//                    }
+//                    mediaPlayer!!.reset()
+//                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
+//                    mediaPlayer!!.prepare()
+//                    mediaPlayer!!.start()
+//                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
+//                    binding.btnPlay.setImageResource(R.drawable.ic_pause)
+//                    SetTimeTotal()
+//                    capNhatTimeBaiHat()
+                    number =
+                        (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                    music = musicList[number]
+                    mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
+                    mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
+                    mediaPlayer!!.prepare() // Chuẩn bị MediaPlayer
+                    mediaPlayer!!.start() // Bắt đầu phát nhạc
+                    // Update thông tin trên giao diện
+                    binding.tvSongName.text = music!!.songName
+                    binding.tvSingerName.text = music!!.singerName
+                    Glide.with(binding.imgSong)
+                        .load(music!!.imageURL)
+                        .into(binding.imgSong)
+                    // Thay đổi trạng thái của nút play
                     binding.btnPlay.setImageResource(R.drawable.ic_pause)
+
                     SetTimeTotal()
                     capNhatTimeBaiHat()
                 }
 
 // Button Previous
                 binding.btnPrevious.setOnClickListener {
-                    displayTextView()
-                    if (number!! <= 0) {
-                        number = musicList.size - 1
-                    } else {
-                        number--
-                    }
-                    music = musicList.get(number!!)
-
-                    // xử lý sự kiện để không bị hát trồng lên nhau
-                    if (mediaPlayer!!.isPlaying) {
-                        mediaPlayer!!.stop()
-                    }
-                    mediaPlayer!!.reset()
-                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-                    mediaPlayer!!.prepare()
-                    mediaPlayer!!.start()
-                    // Đổi hình ảnh của nút "Play" thành hình "Pause"
+                    number =
+                        (number - 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                    music = musicList[number]
+                    mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
+                    mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
+                    mediaPlayer!!.prepare() // Chuẩn bị MediaPlayer
+                    mediaPlayer!!.start() // Bắt đầu phát nhạc
+                    // Update thông tin trên giao diện
+                    binding.tvSongName.text = music!!.songName
+                    binding.tvSingerName.text = music!!.singerName
+                    Glide.with(binding.imgSong)
+                        .load(music!!.imageURL)
+                        .into(binding.imgSong)
+                    // Thay đổi trạng thái của nút play
                     binding.btnPlay.setImageResource(R.drawable.ic_pause)
+
                     SetTimeTotal()
                     capNhatTimeBaiHat()
                 }
@@ -209,7 +239,7 @@ class ScreenFragment : Fragment() {
         // Hiển thị đi tvStartTime và  tvEndTime khi đang ở màn hình chờ ScreenFragment
         binding.tvStartTime.visibility = View.VISIBLE
         binding.tvEndTime.visibility = View.VISIBLE
-//        binding.tvSongName = song_name
+
     }
 
     private fun capNhatTimeBaiHat() {
