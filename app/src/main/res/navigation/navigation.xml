@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_signInFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_facebookFragment3"
+            app:destination="@id/facebookFragment3" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -52,6 +55,16 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/facebookFragment3"
+        android:name="com.example.firebasemusicplayer.login.FacebookFragment"
+        android:label="fragment_facebook"
+        tools:layout="@layout/fragment_facebook" >
+
+        <action
+            android:id="@+id/action_facebookFragment3_to_signInFragment2"
             app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

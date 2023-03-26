@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
-    id 'kotlin-android-extensions'
+//    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -63,14 +64,14 @@ dependencies {
 
     //firebase
 //    implementation 'com.google.firebase:firebase-bom:31.2.1'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+    implementation "com.google.firebase:firebase-analytics-ktx:21.2.0"
 
     // Picasso
     //    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Glide Image
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    implementation "com.github.bumptech.glide:glide:4.14.2"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.15.0"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -80,17 +81,22 @@ dependencies {
     //implementation "androidx.cardview:cardview:1.0.0"
 
     // bo góc Image bằng cách sử dụng thư viện CircleImageView
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "de.hdodenhof:circleimageview:3.1.0"
 
-    implementation 'com.google.firebase:firebase-bom:31.2.3'
+    implementation "com.google.firebase:firebase-bom:31.2.3"
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation "com.google.firebase:firebase-auth:21.1.0"
 
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
     // xem được ảnh GIF trong android
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
+    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.25"
+
+    // Facebook SDK
+//    implementation "com.facebook.android:facebook-android-sdk:[4,5)"
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
 
 }

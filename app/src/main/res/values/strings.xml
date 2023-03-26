@@ -9,4 +9,11 @@
     <string name="logout">Logout</string>
     <string name="phone">Phone</string>
     <string name="name">Name</string>
+
+
+    <string name="facebook_app_id">172614201877845</string>
+    <string name="fb_login_protocol_scheme">025bb6d40c081f4fa0243ce26e5f25f7</string>
+    <string name="facebook_client_token">025bb6d40c081f4fa0243ce26e5f25f7</string>
+
+
 </resources>

@@ -18,8 +18,8 @@ import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_sign_up.*
+//import com.google.firebase.ktx.Firebase
+//import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment : Fragment() {
 //    private lateinit var binding: FragmentSignUpBinding
@@ -150,26 +150,11 @@ class SignUpFragment : Fragment() {
                 ).show()
                 // Tiếp tục với các bước tiếp theo
             } else {
-//                // Xác thực thất bại
-//                if (email.equals("@") && email.equals(".")) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Email hãy thêm @",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } else if (password.length < 6) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Password phải trên 6 ký tự",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } else {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Đăng ký tài khoản thất bại. Vui lòng kiểm tra lại thông tin đăng ký.",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
+                Toast.makeText(
+                    requireContext(),
+                    "Đăng ký thất bại.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
 
