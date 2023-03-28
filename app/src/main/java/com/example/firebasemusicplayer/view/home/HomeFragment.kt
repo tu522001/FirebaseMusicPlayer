@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
             false
         )
 //
-////        searchView = binding.searchView.findViewById(R.id.searchView)
+        searchView = binding.searchView.findViewById(R.id.searchView)
         recyclerViewMusic = binding.recyclerView.findViewById(R.id.recyclerView)
         recyclerViewSinger = binding.recyclerView.findViewById(R.id.singerRecyclerView)
 
@@ -102,26 +102,26 @@ class HomeFragment : Fragment() {
         singerAdapter = SingerAdapter(singerList)
         recyclerViewSinger?.adapter = singerAdapter
 
-//        onItemClick()
+        onItemClick()
 
-//                searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                return false
-//            }
-//
-//            // onQueryTextChange được gọi mỗi khi nội dung trong thanh tìm kiếm thay đổi.
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                musicList!!.clear()
-//                return if (newText.isEmpty()) {
-//                    getListUsers()
-//                    true
-//                } else {
-//                    search(newText)
-//                    true
-//                }
-//            }
-//        })
+                searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            // onQueryTextChange được gọi mỗi khi nội dung trong thanh tìm kiếm thay đổi.
+            override fun onQueryTextChange(newText: String): Boolean {
+                musicList!!.clear()
+                return if (newText.isEmpty()) {
+                    getListUsers()
+                    true
+                } else {
+                    search(newText)
+                    true
+                }
+            }
+        })
 
 //        // RecyclerViewMusic
 //        recyclerViewMusic = binding.recyclerView.findViewById(R.id.recyclerView)
@@ -178,28 +178,28 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-//
-//    private fun search(query: String) {
-//        val databaseReference = FirebaseDatabase.getInstance().getReference("Song")
-//
-//        databaseReference.orderByChild("songName")
-//            .startAt(query)
-//            .endAt(query + "\uf8ff")
-//            .addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    musicList!!.clear()
-//                    for (postSnapshot in snapshot.children) {
-//                        val music = postSnapshot.getValue(Music::class.java)
-//                        musicList!!.add(music!!)
-//                    }
-//                    musicAdapter!!.notifyDataSetChanged()
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                    Log.e("DDD", "onCancelled", databaseError.toException())
-//                }
-//            })
-//    }
+
+    private fun search(query: String) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Song")
+
+        databaseReference.orderByChild("songName")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    musicList!!.clear()
+                    for (postSnapshot in snapshot.children) {
+                        val music = postSnapshot.getValue(Music::class.java)
+                        musicList!!.add(music!!)
+                    }
+                    musicAdapter!!.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e("DDD", "onCancelled", databaseError.toException())
+                }
+            })
+    }
 
     private fun getListUsers() {
         realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
@@ -235,24 +235,24 @@ class HomeFragment : Fragment() {
         )
     }
 
-    // hàm xử lý sự kiện click vào các item ở trong recyclerView để phát nhạc
-//    private fun onItemClick() {
-//        // position bài hát để phát trong RecyclerView
-//        musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
-//            override fun onClick(position: Int) {
-//                val music = musicList!![position]
-//                val bundle = Bundle().apply {
-//                    putInt("Key_position", position)
-//                    putString("Key_song_name", musicList!![position].songName)
-//                    putString("Key_image_URL", musicList!![position].imageURL)
-//                    putString("Key_singer_name", musicList!![position].singerName)
-//                }
-//                findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
-//
-//
-//            }
-//        })
-//    }
+//     hàm xử lý sự kiện click vào các item ở trong recyclerView để phát nhạc
+    private fun onItemClick() {
+        // position bài hát để phát trong RecyclerView
+        musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
+            override fun onClick(position: Int) {
+                val music = musicList!![position]
+                val bundle = Bundle().apply {
+                    putInt("Key_position", position)
+                    putString("Key_song_name", musicList!![position].songName)
+                    putString("Key_image_URL", musicList!![position].imageURL)
+                    putString("Key_singer_name", musicList!![position].singerName)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
+
+
+            }
+        })
+    }
 
 
 }

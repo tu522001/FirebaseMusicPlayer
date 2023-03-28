@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.Music
 import com.example.firebasemusicplayer.model.Singer
 
 class SingerAdapter (singerList: List<Singer>?) : RecyclerView.Adapter<SingerAdapter.SingerViewHolder>() {
@@ -21,7 +20,7 @@ class SingerAdapter (singerList: List<Singer>?) : RecyclerView.Adapter<SingerAda
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingerViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_b, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_singer, parent, false)
         return SingerViewHolder(view)
     }
 

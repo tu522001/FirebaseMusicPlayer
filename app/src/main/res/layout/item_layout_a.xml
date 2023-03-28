@@ -2,67 +2,80 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:weightSum="2"
     android:id="@+id/item_layout_rc"
-    android:background="#95BAECFA">
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:weightSum="2">
 
-    <ImageView
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="10dp"
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_weight="1"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/soobin" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/soobin" />
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ID :" />
+            android:text="ID :"
+            android:visibility="gone" />
 
         <TextView
-            android:layout_marginTop="20dp"
             android:id="@+id/tv_songName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Song Name :" />
+            android:layout_marginTop="20dp"
+            android:text="Song Name :"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_marginTop="5dp"
             android:id="@+id/tv_singerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Singer Name :" />
+            android:layout_marginTop="5dp"
+            android:text="Singer Name :"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_imageURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_songURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:visibility="gone" />
     </LinearLayout>
 
 
