@@ -1,6 +1,8 @@
 package com.example.firebasemusicplayer.view.home
 
 import android.media.MediaPlayer
+import android.media.tv.TvContract.Programs.Genres.MUSIC
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -17,13 +19,20 @@ import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.model.Music
+import com.facebook.AccessToken
+import com.facebook.share.model.ShareHashtag
+import com.facebook.share.model.ShareLinkContent
+import com.facebook.share.model.ShareMedia
+import com.facebook.share.model.ShareMediaContent
+import com.facebook.share.widget.ShareDialog
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.net.MediaType
 import java.io.IOException
 import java.text.SimpleDateFormat
 
 
 class ScreenFragment : Fragment() {
 
-    private var count : Int = 0
+    private var count: Int = 0
     private var number: Int = 0
     private lateinit var song_name: String
     private lateinit var image_url: String
@@ -32,6 +41,7 @@ class ScreenFragment : Fragment() {
     private var music: Music? = null
     private lateinit var binding: FragmentScreenBinding
     private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
+    private lateinit var songsURL : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,13 +64,29 @@ class ScreenFragment : Fragment() {
 //            findNavController().navigate(R.id.action_screenFragment_to_homeFragment)
 //        }
 
-        binding.btnLike.setOnClickListener{
+        binding.btnLike.setOnClickListener {
             count++
-            if (count % 2 == 1){
+            if (count % 2 == 1) {
                 binding.btnLike.setImageResource(R.drawable.ic_favorite)
-            }else{
+            } else {
                 binding.btnLike.setImageResource(R.drawable.ic_favorite_border)
             }
+        }
+
+        // share
+        binding.btnShare.setOnClickListener {
+
+            var hashTag = ShareHashtag.Builder().build()
+
+            var shareContent = ShareLinkContent.Builder().setQuote("Bài hát : "+song_name + " của ca sĩ : "+singer_name)
+                .setShareHashtag(hashTag)
+                .setContentUrl(Uri.parse(songsURL))
+                .build()
+
+            Log.d("TTT","SONG URL "+songsURL)
+            ShareDialog.show(this,shareContent)
+
+
         }
 
         return binding.root
@@ -72,6 +98,8 @@ class ScreenFragment : Fragment() {
 
         // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
         number = bundle?.getInt("Key_position")!!
+
+        Log.d("HHH","number : "+number)
 
         // lấy dữ liệu songName từ HomeFramgent sang ScreenFragment
         song_name = bundle?.getString("Key_song_name")!!
@@ -91,6 +119,9 @@ class ScreenFragment : Fragment() {
                 music = musicList.get(number!!)
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
+
+                songsURL = musicList!!.get(number!!).songURL
+
 
                 // hiển thị dữ liệu trên Song Name ra màn hình ScreenFragment
                 binding.tvSongName.text = song_name
@@ -166,7 +197,8 @@ class ScreenFragment : Fragment() {
 
 // Button Next
                 binding.btnNext.setOnClickListener {
-                    number = (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                    number =
+                        (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
                     music = musicList[number]
                     mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
                     mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer
@@ -270,7 +302,8 @@ class ScreenFragment : Fragment() {
 
                         //Kiểm tra thời gian bài hát -> nếu kết thúc  -> next
                         mediaPlayer?.setOnCompletionListener {
-                            number = (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
+                            number =
+                                (number + 1) % musicList.size // Lấy vị trí phát tiếp theo trong danh sách
                             music = musicList[number]
                             mediaPlayer!!.reset() // Đặt lại MediaPlayer trước khi phát bài hát mới
                             mediaPlayer!!.setDataSource(music!!.songURL) // Set data source cho MediaPlayer

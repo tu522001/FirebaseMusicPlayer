@@ -123,32 +123,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-//        // RecyclerViewMusic
-//        recyclerViewMusic = binding.recyclerView.findViewById(R.id.recyclerView)
-//        recyclerViewMusic?.setHasFixedSize(true)
-//        recyclerViewMusic?.setLayoutManager(
-//            LinearLayoutManager(
-//                context,
-//                LinearLayoutManager.HORIZONTAL,
-//                false
-//            )
-//        )
-
-//        val musicList= ArrayList<Music>()
-//
-//        musicList.add(Music(1,"a","a","a","a"))
-//        musicList.add(Music(2,"b","b","b","b"))
-//        musicList.add(Music(3,"c","c","c","c"))
-//        musicList.add(Music(4,"d","d","d","d"))
-//        musicList.add(Music(5,"e","e","e","e"))
-//
-//         musicAdapter = MusicAdapter(musicList)
-//
-//        recyclerViewMusic?.setAdapter(musicAdapter)
-//
-//
-
-
 //        // RecyclerViewSinger
         recyclerViewSinger = binding.singerRecyclerView.findViewById(R.id.singerRecyclerView)
         recyclerViewSinger?.setHasFixedSize(true)
@@ -159,19 +133,7 @@ class HomeFragment : Fragment() {
                 false
             )
         )
-//
-//        val singerList= ArrayList<Singer>()
-//
-//        singerList.add(Singer(1,"a","a","a","a"))
-//        singerList.add(Singer(2,"b","b","b","b"))
-//        singerList.add(Singer(3,"c","c","c","c"))
-//        singerList.add(Singer(1,"a","a","a","a"))
-//        singerList.add(Singer(2,"b","b","b","b"))
-//        singerList.add(Singer(3,"c","c","c","c"))
-//        singerList.add(Singer(1,"a","a","a","a"))
-//        singerList.add(Singer(2,"b","b","b","b"))
-//        singerList.add(Singer(3,"c","c","c","c"))
-//
+
          singerAdapter = SingerAdapter(singerList)
 
         recyclerViewSinger?.setAdapter(singerAdapter)

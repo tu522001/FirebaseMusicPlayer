@@ -28,8 +28,10 @@ class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.
     override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
         val music: Music = musicList!![position]
         holder.tv_id.text = "id: " + music.id
-        holder.tv_songName.text = "Bài hát : " + music.songName
-        holder.tv_singerName.text = "Ca sĩ : " + music.singerName
+//        holder.tv_songName.text = "Bài hát : " + music.songName
+//        holder.tv_singerName.text = "Ca sĩ : " + music.singerName
+        holder.tv_songName.text = music.songName
+        holder.tv_singerName.text = music.singerName
         holder.tv_imageURL.text = "image URL: " + music.imageURL
         holder.tv_songURL.text = "song URL: " + music.songURL
 
