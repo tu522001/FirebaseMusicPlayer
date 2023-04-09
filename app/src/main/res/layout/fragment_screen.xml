@@ -91,7 +91,7 @@
                     android:gravity="center"
                     android:text="Nếu Ngày Ấy"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

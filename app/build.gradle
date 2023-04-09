@@ -26,6 +26,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
     }
 
     buildTypes {
@@ -48,6 +49,13 @@ android {
         viewBinding true
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
 
 }
 
@@ -95,9 +103,13 @@ dependencies {
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.25"
 
     // Facebook SDK
-//    implementation "com.facebook.android:facebook-android-sdk:[4,5)"
     implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
+    //Excel
+    implementation 'org.apache.poi:poi:4.0.0'
+    implementation 'org.apache.poi:poi-ooxml:4.0.0'
 
+    //Circleindicator
+    implementation 'me.relex:circleindicator:2.1.6'
 }

@@ -6,5 +6,6 @@ data class Singer (
     var songName: String = "",
     var singerName: String = "",
     var imageURL: String = "",
-    var songURL: String = ""
+    var songURL: String = "",
+//    var productList: List<Product> = listOf()
 )

@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.firebasemusicplayer.login.SignInFragment"
+        android:name="com.example.firebasemusicplayer.view.login.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
 
@@ -47,10 +47,13 @@
         <action
             android:id="@+id/action_signInFragment_to_facebookFragment3"
             app:destination="@id/facebookFragment3" />
+        <action
+            android:id="@+id/action_signInFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.firebasemusicplayer.login.SignUpFragment"
+        android:name="com.example.firebasemusicplayer.view.login.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -59,12 +62,20 @@
     </fragment>
     <fragment
         android:id="@+id/facebookFragment3"
-        android:name="com.example.firebasemusicplayer.login.FacebookFragment"
+        android:name="com.example.firebasemusicplayer.view.login.FacebookFragment"
         android:label="fragment_facebook"
         tools:layout="@layout/fragment_facebook" >
 
         <action
             android:id="@+id/action_facebookFragment3_to_signInFragment2"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_facebookFragment3_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_admin"
+        android:id="@+id/adminFragment"
+        android:name="com.example.firebasemusicplayer.view.home.AdminFragment"
+        android:label="AdminFragment" />
 </navigation>

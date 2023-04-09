@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.login
+package com.example.firebasemusicplayer.view.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,13 +14,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSignInBinding
 import com.example.firebasemusicplayer.model.User
+import com.example.firebasemusicplayer.viewmodel.SignInViewModel
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import java.util.*
 
 
 //import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -74,22 +74,6 @@ class SignInFragment : Fragment() {
             findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
         }
 
-//        LoginManager.getInstance().registerCallback(callbackManager,
-//            object : FacebookCallback<LoginResult?> {
-//                override fun onSuccess(result: LoginResult?) {
-//                    // App code
-//                    findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
-//                }
-//
-//                override fun onCancel() {
-//                    // App code
-//                }
-//
-//                override fun onError(exception: FacebookException) {
-//                    // App code
-//                }
-//            })
-
         LoginManager.getInstance().registerCallback(callbackManager,object :FacebookCallback<LoginResult>{
 
             override fun onCancel() {
@@ -105,6 +89,8 @@ class SignInFragment : Fragment() {
             }
 
         })
+
+
 
         binding.imgFacebook.setOnClickListener{
             LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("public_profile"));

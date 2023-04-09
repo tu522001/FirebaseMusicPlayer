@@ -16,7 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.data.RealtimeDatabaseHelper
+import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.model.Music
 import com.facebook.AccessToken

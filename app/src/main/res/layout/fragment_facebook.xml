@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.FacebookFragment">
+        tools:context=".view.login.FacebookFragment">
 
 
         <ImageView
@@ -52,6 +52,17 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="@+id/img_avatar_facebook"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+
+        <Button
+            android:id="@+id/btn_callHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Home"
+            app:layout_constraintEnd_toEndOf="@+id/btn_logout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_logout"
+            app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

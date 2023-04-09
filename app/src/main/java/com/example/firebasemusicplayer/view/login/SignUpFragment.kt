@@ -1,9 +1,6 @@
-package com.example.firebasemusicplayer.login
+package com.example.firebasemusicplayer.view.login
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.databinding.FragmentSignUpBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.example.firebasemusicplayer.viewmodel.SignUpViewModel
 
 //import com.google.firebase.ktx.Firebase
 //import kotlinx.android.synthetic.main.fragment_sign_up.*

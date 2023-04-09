@@ -1,7 +1,5 @@
-package com.example.firebasemusicplayer.login
+package com.example.firebasemusicplayer.viewmodel
 
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

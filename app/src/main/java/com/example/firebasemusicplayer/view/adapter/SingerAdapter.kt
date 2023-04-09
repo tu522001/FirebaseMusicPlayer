@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.adapter
+package com.example.firebasemusicplayer.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
