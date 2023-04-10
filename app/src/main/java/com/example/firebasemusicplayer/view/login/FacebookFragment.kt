@@ -1,29 +1,35 @@
 package com.example.firebasemusicplayer.view.login
 
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentFacebookBinding
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
-import com.facebook.login.LoginManager
 import org.json.JSONException
 import com.bumptech.glide.request.target.Target
+import com.example.firebasemusicplayer.model.Music
+import com.example.firebasemusicplayer.model.Tools
+import com.example.firebasemusicplayer.view.adapter.MusicAdapter
+import com.example.firebasemusicplayer.view.adapter.ToolsAdapter
+import java.util.ArrayList
 
 
 class FacebookFragment : Fragment() {
 
     private lateinit var binding: FragmentFacebookBinding
-
+    private lateinit var listTools: ArrayList<Tools>
+    private lateinit var toolsAdapter: ToolsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,9 +44,9 @@ class FacebookFragment : Fragment() {
         ) { `object`, response ->
 
             try {
-                var fullName : String = `object`!!.getString("name")
+                var fullName: String = `object`!!.getString("name")
                 binding.tvUserName.text = fullName
-                 var url = `object`.getJSONObject("picture").getJSONObject("data").getString("url")
+                var url = `object`.getJSONObject("picture").getJSONObject("data").getString("url")
 
                 Glide.with(this)
                     .load(url)
@@ -48,11 +54,11 @@ class FacebookFragment : Fragment() {
                     .into(binding.imgAvatarFacebook)
 
                 var bundle_url_avatar = Bundle().apply {
-                    putString("Key_url_avatar_facebook",url)
+                    putString("Key_url_avatar_facebook", url)
                 }
-                binding.btnCallHome.setOnClickListener{
-                    findNavController().navigate(R.id.action_facebookFragment3_to_homeFragment,bundle_url_avatar)
-                }
+//                binding.btnCallHome.setOnClickListener{
+//                    findNavController().navigate(R.id.action_facebookFragment3_to_homeFragment,bundle_url_avatar)
+//                }
 
 
             } catch (e: JSONException) {
@@ -67,11 +73,42 @@ class FacebookFragment : Fragment() {
         request.executeAsync()
 
 
+//        binding.btnLogout.setOnClickListener {
+//            LoginManager.getInstance().logOut()
+//            findNavController().navigate(R.id.action_facebookFragment3_to_signInFragment2)
+//        }
 
-        binding.btnLogout.setOnClickListener {
-            LoginManager.getInstance().logOut()
-            findNavController().navigate(R.id.action_facebookFragment3_to_signInFragment2)
-        }
+        listTools = ArrayList<Tools>()
+        listTools = Tools.getMock() as ArrayList<Tools>
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        binding.rcvTools?.layoutManager = linearLayoutManager
+
+        toolsAdapter = ToolsAdapter(listTools)
+        binding.rcvTools?.adapter = toolsAdapter
+
+//        toolsAdapter.setOnItemClick(object : ToolsAdapter.OnItemListener{
+//            override fun onClick(position: Int) {
+//                Log.d("PPP","Position : "+position)
+//            }
+//        })
+        toolsAdapter?.setOnItemClickListener(object : ToolsAdapter.OnItemClickListener {
+            override fun onClick(position: Int) {
+               Log.d("PPP","position : "+position)
+//                if(position==0){
+//                    findNavController().navigate(R.id.action_facebookFragment3_to_termsOfServiceFragment)
+//                }
+                when(position){
+//                    0 ->
+                    1 -> findNavController().navigate(R.id.action_facebookFragment3_to_helpFragment)
+                    2 ->findNavController().navigate(R.id.action_facebookFragment3_to_termsOfServiceFragment)
+//                    3 ->
+//                    4 ->
+                }
+
+            }
+        })
+
         return binding.root
     }
 

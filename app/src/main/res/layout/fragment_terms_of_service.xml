@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.setting.TermsOfServiceFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageButton
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ConstraintLayout"
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back" />
+
+        <ScrollView
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+            android:id="@+id/scrollView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="THỎA THUẬN CUNG CẤP VÀ SỬ DỤNG DỊCH VỤ MẠNG XÃ HỘI MUSIC"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều 1: Giải thích từ ngữ"
+                    android:textColor="#F40202"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Music: là dịch vụ mạng xã hội do Công Ty Cổ Phần VNG là chủ quản có thể truy cập qua website zingmp3.vn, ứng dụng Music hoặc bất kỳ cách truy cập khả dụng nào khác.
+Thỏa Thuận: là thỏa thuận cung cấp và sử dụng dịch vụ mạng xã hội Music, cùng với tất cả các bản sửa đổi, bổ sung, cập nhật.
+VNG: là Công Ty Cổ Phần VNG.
+Thông Tin Cá Nhân: là thông tin gắn liền với việc xác định danh tính, nhân thân của cá nhân bao gồm tên, tuổi, địa chỉ, số chứng minh nhân dân, số điện thoại, địa chỉ thư điện tử, tài khoản ngân hàng của Người Sử Dụng và một số thông tin khác theo quy định của pháp luật.
+Zalo ID: là tài khoản để Người Sử Dụng đăng nhập, upload nội dung lên Music và sử dụng các tính năng nâng cao khác.
+Người Sử Dụng: là bên truy cập Music không phụ thuộc có hay không có Zalo ID.
+Sở Hữu Trí Tuệ: là những sáng chế, cải tiến, thiết kế, quy trình, công thức, phương pháp, cơ sở dữ liệu, thông tin, bản vẽ, mã, chương trình máy tính, tác phẩm có bản quyền (hiện tại và tương lai), thiết kế mạch tích hợp bán dẫn, thương hiệu, nhãn hiệu (dù đã đăng ký hay chưa đăng ký) tên thương mại và (thiết kế) bao bì thương phẩm.
+"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều 2: Nội dung dịch vụ"
+                    android:textColor="#F40202"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Music là mạng xã hội chia sẻ thông tin về âm nhạc, cho phép nghe nhạc trực tuyến, xem video clip, music video (MV) bao gồm nhiều thể loại khác nhau và/hoặc những nội dung khác được Người Sử Dụng đăng tải.
+Thông qua Music, chủ thể bản quyền có thể để đăng tải bài hát / video clip, MV chất lượng để truyền đạt tới Người Sử Dụng.
+Người Sử Dụng có thể nghe trực tuyến hoặc tải về từ website hoặc từ ứng dụng MP3 được phát triển trên nền tảng di động.
+Music cho phép Người Sử Dụng trao đổi, thảo luận và phản hồi thông qua công cụ chat bằng kí tự chữ về những nội dung được cung cấp trên Music.
+Người Sử Dụng Music có thể sử dụng dịch vụ trên Website hoặc/và các ứng dụng Music phát triển trên thiết bị di động.
+Thông qua Music, VNG cung cấp dịch vụ quảng cáo trên Wesite và/hoặc trên ứng dụng Music phát triển trên thiết bị di động
+"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều 3: Chấp nhận điều khoản sử dụng và sửa đổi"
+                    android:textColor="#F40202"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Khi sử dụng Dịch vụ Music, Người Sử Dụng mặc định phải đồng ý và tuân theo các điều khoản được quy định tại Thỏa Thuận này và quy định, quy chế mà Music liên kết, tích hợp (nêu có) bao gồm nhưng không giới hạn Zalo ID tại http://zaloapp.com/zalo/dieukhoan/
+Khi truy cập, sử dụng Music bằng bất cứ phương tiện (máy tính, điện thoại, tivi thiết bị kết nối internet) hoặc sử dụng ứng dụng Music mà VNG phát triển thì Người Sử Dụng cũng phải tuân theo Quy chế này.
+Để đáp ứng nhu cầu sử dụng của Người Sử Dụng, Music không ngừng hoàn thiện và phát triển, vì vậy các điều khoản quy định tại Thỏa thuận cung cấp và sử dụng dịch vụ mạng xã hội Music này, Quy chế Zalo ID có thể được cập nhật, chỉnh sửa bất cứ lúc nào mà không cần phải thông báo trước tới Người Sử Dụng. Music sẽ công bố rõ trên Website, diễn đàn về những thay đổi, bổ sung đó.
+Trong trường hợp một hoặc một số điều khoản Quy chế này xung đột với các quy định của luật pháp, điều khoản đó sẽ được chỉnh sửa cho phù hợp với quy định pháp luật hiện hành, và phần còn lại của Quy chế sử dụng vẫn giữ nguyên giá trị.
+
+"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:textColor="#F40202"
+                    android:textStyle="bold"
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều 4: Đăng ký tài khoản và sử dụng dịch vụ" />
+
+                <TextView
+                    android:textColor="#000000"
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Người Sử Dụng phải đủ năng lực hành vi dân sự và đủ 13 tuổi trở lên mới được phép đăng ký Zalo ID và/hoặc sử dụng Music.
+Khách hàng sử dụng tài khoản Zalo ID để truy cập Music. Khách hàng cũng có thể đăng nhập Music từ tài khoản liên kết mà Music cho phép.
+Một số tính năng của Music yêu cầu Người Sử Dụng phải đăng ký, đăng nhập để sử dụng. Nếu Người Sử Dụng không đăng ký, đăng nhập thì chỉ sử dụng Music với các tính năng thông thường. Chúng tôi khuyến khích Người Sử Dụng đăng ký tài khoản để sử dụng Music được tốt nhất.
+Trên Website/ứng dụng Music xuất hiện link website, hoặc biểu tượng website khác, bạn không nên suy luận rằng Music hoạt động, kiểm soát hoặc sở hữu với những website này. Việc truy cập tới các trang này khác hoàn toàn có thể gặp rủi ro, nguy hiểm. Người Sử Dụng hoàn toàn chịu trách nhiệm rủi ro khi sử dụng website liên kết này. Music không chịu trách nhiệm về nội dung của bất kì website hoặc điểm đến nào ngoài trang Music.
+Music cho phép Người Sử Dụng cung cấp, chia sẻ video, clip thuộc các thể loại mà Music định hướng. Music sẽ thẩm tra sơ bộ về kỹ thuật và nội dung video, và như vậy video, nội dung cung cấp của Người Sử Dụng có thể không được đăng tải lên ngay lập tức.
+Bài viết đánh giá ý kiến của bạn là một phần Dịch vụ Music. Người Sử Dụng có thể xuất bản, truyền tải, gửi đi những đánh giá, ý kiến, hoặc những tài liệu khác lên Music. Người Sử Dụng phải đảm bảo bài viết, đánh giá của mình phù hợp với giới hạn ngôn từ và nội dung.
+" />
+
+                <TextView
+                    android:textColor="#F40202"
+                    android:textStyle="bold"
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều 5. Các nội dung cấm trao đổi và chia sẻ trên mạng xã hội" />
+
+                <TextView
+                    android:textColor="#000000"
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Khi sử dụng sản phẩm Music, nghiêm cấm khách hàng một số hành vi bao gồm nhưng không giới hạn sau:
+
+
+Lợi dụng việc cung cấp, trao đổi, sử dụng thông tin trên Music nhằm mục đích:
+a. Chống lại Nhà nước Cộng hoà xã hội chủ nghĩa Việt Nam; gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội; phá hoại khối đại đoàn kết toàn dân; tuyên truyền chiến tranh xâm lược, khủng bố; gây hận thù, mâu thuẫn giữa các dân tộc, sắc tộc, chủng tộc, tôn giáo;
+b. Tuyên truyền, kích động bạo lực, dâm ô, đồi trụy, tội ác, tệ nạn xã hội, mê tín dị đoan, phá hoại thuần phong, mỹ tục của dân tộc.
+c. Tuyệt đối không bàn luận, đăng tải các nội dung về các vấn đề chính trị.
+Người Sử Dụng lợi dụng việc sử dụng Music nhằm tiết lộ bí mật nhà nước, bí mật quân sự, an ninh, kinh tế, đối ngoại và những bí mật khác do pháp luật quy định bằng bất cứ hình thức nào trên Music.
+Quảng cáo, tuyên truyền, mua bán hàng hoá, dịch vụ bị cấm hoặc truyền bá tác phẩm báo chí, văn học, nghệ thuật, xuất bản phẩm bị cấm trên Music.
+Khi giao tiếp với người dùng khác, Người Sử Dụng quấy rối, chửi bới, làm phiền hay có bất kỳ hành vi thiếu văn hoá.
+Người Sử Dụng có quyền sử dụng đối với hình ảnh của mình. Khi sử dụng hình ảnh của cá nhân khác, Người Sử Dụng phải được sự đồng ý của cá nhân đó. Nghiêm cấm việc sử dụng hình ảnh của người khác mà xâm phạm danh dự, nhân phẩm, uy tín của người có hình ảnh.
+Lợi dụng mạng xã hội Music để thu thập thông tin của Người Sử Dụng, công bố thông tin, tư liệu về đời tư của Người Sử Dụng khác.
+Đặt tài khoản theo tên của danh nhân, tên các vị lãnh đạo của Đảng và Nhà nước, tên của cá nhân, tổ chức tội phạm, phản động, khủng bố hoặc tài khoản có ý nghĩa không lành mạnh, trái với thuần phong mỹ tục.
+Đưa thông tin xuyên tạc, vu khống, nhạo báng, xúc phạm uy tín tới tổ chức, cá nhân dưới bất kỳ hình thức nào (nhạo báng, chê bai, kỳ thị tôn giáo, giới tính, sắc tộc….).
+Hành vi, thái độ làm tổn hại đến uy tín Music hoặc VNG dưới bất kỳ hình thức hoặc phương thức nào.
+Nghiêm cấm quảng bá bất kỳ sản phẩm dưới bất kỳ hình thức nào, bao gồm nhưng không giới hạn việc gửi, truyền bất kỳ thông điệp nào mang tính quảng cáo, mời gọi, thư dây truyền, cơ hội đầu tư trên Music mà không có sự đồng ý bằng văn bản của VNG.
+Lợi dụng Music để tổ chức các hình thức cá cược, cờ bạc hoặc các thỏa thuận liên quan đến tiền, hiện kim, hiện vật.
+Cản trở trái pháp luật, gây rối, phá hoại hệ thống máy chủ; Cản trở việc truy cập thông tin và sử dụng các dịch vụ hợp pháp trên Music.
+Sử dụng trái phép mật khẩu, khoá mật mã của các tổ chức, cá nhân, thông tin riêng, thông tin cá nhân và tài nguyên Internet.
+Trực tiếp hoặc gián tiếp sử dụng bất kỳ thiết bị, phần mềm, trang web internet, dịch vụ dựa trên web, hoặc các phương tiện khác để gỡ bỏ, thay đổi, bỏ qua, lẩn tránh, cản trở, hoặc phá hoại bất kỳ bản quyền, thương hiệu, hoặc các dấu hiệu về quyền sở hữu khác được đánh dấu trên Nội dung (như logo) hoặc bất kỳ hệ thống kiểm soát dữ liệu, thiết bị, biện pháp bảo vệ nội dung khác cũng như các biện pháp hạn chế truy cập từ các vùng địa lý khác nhau.
+Trực tiếp hoặc gián tiếp thông qua bất kỳ thiết bị, phần mềm, trang web internet, dịch vụ dựa trên web, hoặc các phương tiện khác để sao chép, tải về, chụp lại, sản xuất lại, nhân bản, lưu trữ, phân phối, tải lên, xuất bản, sửa đổi, dịch thuật, phát sóng, trình chiếu, hiển thị, bán, truyền tải hoặc truyền lại nội dung trừ khi được sự cho phép của Music bằng văn bản.
+Tạo ra, tái tạo, phân phối hay quảng cáo một chi tiết của bất kỳ nội dung trừ khi được phép của Music. Bạn không được phép xây dựng mô hình kinh doanh sử dụng các Nội dung cho dù là có hoặc không vì lợi nhuận. Nội dung được đề cập tại Music bao gồm nhưng không giới hạn bất kỳ văn bản, đồ họa, hình ảnh, bố trí, giao diện, biểu tượng, hình ảnh, tài liệu âm thanh và video, và ảnh tĩnh. Ngoài ra, chúng tôi nghiêm cấm việc tạo ra các sản phẩm phát sinh hoặc vật liệu có nguồn gốc từ hoặc dựa trên bất kì nội dung nào bao gồm dựng phim, làm video tương tự, hình nền, chủ đề máy tính, thiệp chúc mừng, và hàng hóa, trừ khi nó được sự cho phép của Music bằng văn bản.
+Giả mạo tổ chức, cá nhân và phát tán thông tin giả mạo, thông tin sai sự thật trên Music xâm hại đến quyền và lợi ích hợp pháp của tổ chức, cá nhân.
+Tạo đường dẫn trái tới tên miền hợp pháp của tổ chức, cá nhân. Tạo, cài đặt, phát tán các phần mềm độc hại, vi rút máy tính; xâm nhập trái phép, chiếm quyền điều khiển hệ thống thông tin, tạo lập công cụ tấn công trên Internet.
+Tuyệt đối không sử dụng bất kỳ chương trình, công cụ hay hình thức nào khác để can thiệp vào Music
+Nghiêm cấm việc phát tán, truyền bá hay cổ vũ cho bất kỳ hoạt động nào nhằm can thiệp, phá hoại hay xâm nhập vào dữ liệu của sản phẩm cung cấp hoặc hệ thống máy chủ Music.
+Không được có bất kỳ hành vi nào nhằm đăng nhập trái phép hoặc tìm cách đăng nhập trái phép hoặc gây thiệt hại cho hệ thống máy chủ Music
+Nghiêm cấm mọi hành vi xâm phạm khác dưới mọi hình thức tới sản phẩm, tài sản và uy tín của VNG.
+" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

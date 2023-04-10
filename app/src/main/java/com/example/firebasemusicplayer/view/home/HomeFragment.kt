@@ -14,19 +14,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.view.adapter.MusicAdapter
-import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
-import com.example.firebasemusicplayer.view.adapter.SingerAdapter
-import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentHomeBinding
 import com.example.firebasemusicplayer.model.Music
 import com.example.firebasemusicplayer.model.Photo
 import com.example.firebasemusicplayer.model.Singer
+import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
+import com.example.firebasemusicplayer.view.adapter.MusicAdapter
+import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
+import com.example.firebasemusicplayer.view.adapter.SingerAdapter
 import com.facebook.FacebookSdk.getApplicationContext
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import org.apache.poi.ss.usermodel.Cell
@@ -44,6 +46,9 @@ class HomeFragment : Fragment() {
     private var searchView: SearchView? = null
     private var musicAdapter: MusicAdapter? = null
     private var singerAdapter: SingerAdapter? = null
+
+    private var mViewPager2 : ViewPager2? = null
+    private var mbottomNavigationView: BottomNavigationView? = null
     private var photoAdapter: PhotoAdapter? = null
     private var musicList: ArrayList<Music>? = null
     private var singerList: ArrayList<Singer>? = null
@@ -117,6 +122,7 @@ class HomeFragment : Fragment() {
         singerList = ArrayList<Singer>()
         photoList = ArrayList<Photo>()
 
+
         Log.d("QQQ", "arrayList" + musicList!!.size)
         musicAdapter = MusicAdapter(musicList)
         recyclerViewMusic?.adapter = musicAdapter
@@ -149,12 +155,17 @@ class HomeFragment : Fragment() {
         val bundle = arguments
 
         // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
-        url_avatar = bundle?.getString("Key_url_avatar_facebook")!!
+        if (url_avatar == null){
 
-        Glide.with(this)
-            .load(url_avatar)
-            .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
-            .into(binding.imgAvatarFacebook)
+        }else{
+            url_avatar = bundle?.getString("Key_url_avatar_facebook")!!
+            Glide.with(this)
+                .load(url_avatar)
+                .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                .into(binding.imgAvatarFacebook)
+        }
+
+
 
         binding.imgAvatarFacebook.setOnClickListener {
 //            findNavController().navigate()
@@ -264,10 +275,10 @@ class HomeFragment : Fragment() {
                                 cell.setCellValue("songURL")
 
                                 sheet.setColumnWidth(0, 20 * 100)
-                                sheet.setColumnWidth(1, 30 * 2500)
+                                sheet.setColumnWidth(1, 30 * 1000)
                                 sheet.setColumnWidth(2, 30 * 300)
                                 sheet.setColumnWidth(3, 30 * 300)
-                                sheet.setColumnWidth(4, 30 * 2500)
+                                sheet.setColumnWidth(4, 30 * 1000)
 
                                 for (userModel in musicList!!) {
                                     val row1 = sheet.createRow(musicList!!.indexOf(userModel) + 1)
@@ -374,6 +385,7 @@ class HomeFragment : Fragment() {
         // position bài hát để phát trong RecyclerView
         musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
             override fun onClick(position: Int) {
+
                 val musics = musicList!![position]
                 val bundle = Bundle().apply {
                     putInt("Key_position", position)
