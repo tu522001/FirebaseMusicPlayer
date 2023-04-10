@@ -149,12 +149,17 @@ class HomeFragment : Fragment() {
         val bundle = arguments
 
         // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
-        url_avatar = bundle?.getString("Key_url_avatar_facebook")!!
+        if (url_avatar == null){
 
-        Glide.with(this)
-            .load(url_avatar)
-            .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
-            .into(binding.imgAvatarFacebook)
+        }else{
+            url_avatar = bundle?.getString("Key_url_avatar_facebook")!!
+            Glide.with(this)
+                .load(url_avatar)
+                .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                .into(binding.imgAvatarFacebook)
+        }
+
+
 
         binding.imgAvatarFacebook.setOnClickListener {
 //            findNavController().navigate()
