@@ -6,7 +6,7 @@
     tools:context=".view.home.SplashFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/black"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,7 +14,7 @@
             android:id="@+id/gifImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/waiting_screen_image"
+            android:src="@drawable/music"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -53,7 +53,8 @@ class SignInFragment : Fragment() {
 //                    requireContext(), "User logged in successfully",
 //                    Toast.LENGTH_SHORT
 //                ).show()
-                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+//                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
             } else {
                 Toast.makeText(
                     requireContext(), "Log in Error: ",

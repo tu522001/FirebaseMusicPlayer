@@ -7,6 +7,7 @@ data class Tools(val image: Int, val text: String)
     companion object {
         fun getMock(): MutableList<Tools> {
             return mutableListOf(
+                Tools(R.drawable.b5,"Nghe nhạc"),
                 Tools(R.drawable.b, "Phiên bản"),
                 Tools(R.drawable.b1, "Trợ giúp"),
                 Tools(R.drawable.b2, "Điều khoản"),

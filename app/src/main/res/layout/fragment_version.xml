@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VersionFragment">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/img_btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ConstraintLayout" />
+    <ScrollView
+        app:layout_constraintTop_toTopOf="@+id/img_btn_back"
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PHIÊN BẢN"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\n\t Phiên bản ứng dụng Music trong hệ điều hành Android đã trải qua nhiều cải tiến và nâng cấp trong suốt quá trình phát triển. \n
+\t Ứng dụng Music trên Android cung cấp cho người dùng một giao diện đơn giản, dễ sử dụng và tiện lợi để nghe nhạc. Người dùng có thể truy cập vào thư viện nhạc của mình, tìm kiếm bài hát, tạo danh sách phát và nghe nhạc trực tuyến. \n
+\t Phiên bản mới nhất của ứng dụng Music trên Android hỗ trợ nhiều tính năng đáng chú ý, bao gồm khả năng đồng bộ hóa và chia sẻ nhạc qua các thiết bị khác nhau, tính năng tìm kiếm nâng cao để dễ dàng tìm kiếm bài hát yêu thích và tính năng tải nhạc trực tuyến từ các dịch vụ như Google Play Music và YouTube Music.\n
+\t Ngoài ra, ứng dụng Music trên Android còn cung cấp cho người dùng nhiều tùy chọn cấu hình âm thanh, giúp cải thiện trải nghiệm nghe nhạc của người dùng. Bạn có thể điều chỉnh âm lượng, cân bằng âm thanh, tăng cường âm bass và nhiều hơn nữa."
+                android:textColor="#000000" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

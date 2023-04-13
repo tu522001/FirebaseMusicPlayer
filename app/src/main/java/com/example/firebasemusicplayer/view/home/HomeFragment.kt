@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
     private lateinit var realtimeDatabaseHelper1: RealtimeDatabaseHelper
     private lateinit var realtimeDatabaseHelper2: RealtimeDatabaseHelper
 
-    private var url_avatar: String? = null
+    private lateinit var url_avatar: String
 
     private lateinit var binding : FragmentHomeBinding
 
@@ -152,13 +152,15 @@ class HomeFragment : Fragment() {
             }
         })
 
-        val bundle = arguments
 
         // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
-        if (url_avatar == null){
 
-        }else{
-            url_avatar = bundle?.getString("Key_url_avatar_facebook")!!
+
+        val bundle = arguments
+// Kiểm tra nếu bundle không null và có chứa key "Key_url_avatar_facebook"
+        if (bundle != null && bundle.containsKey("Key_url_avatar_facebook")) {
+            val url_avatar = bundle.getString("Key_url_avatar_facebook")
+            // Sử dụng Glide để hiển thị ảnh đại diện
             Glide.with(this)
                 .load(url_avatar)
                 .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
@@ -167,8 +169,11 @@ class HomeFragment : Fragment() {
 
 
 
+
+
+
         binding.imgAvatarFacebook.setOnClickListener {
-//            findNavController().navigate()
+            findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
         }
 
 
