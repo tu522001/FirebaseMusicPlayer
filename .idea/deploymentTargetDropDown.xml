@@ -6,12 +6,12 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="4DAYV895JNYPLVSO" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\truon\.android\avd\Pixel_5_API_29.avd" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-04-14T17:10:01.992275900Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-04-14T17:59:55.798521400Z" />
   </component>
 </project>

@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
@@ -55,9 +56,10 @@ class ScreenFragment : Fragment() {
         doSomethingWithListUsers()
         onClickPosition()
 
-//        binding.imgBtnLogoutHome.setOnClickListener{
-//            findNavController().navigate(R.id.action_screenFragment_to_homeFragment)
-//        }
+        binding.imgBtnLogoutHome.setOnClickListener{
+            findNavController().navigate(R.id.action_screenFragment_to_homeFragment)
+            mediaPlayer?.stop()
+        }
 
         binding.btnLike.setOnClickListener {
             count++
@@ -112,11 +114,7 @@ class ScreenFragment : Fragment() {
             onSuccess = { musicList ->
 
                 music = musicList.get(number!!)
-                mediaPlayer = MediaPlayer()
-                mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
-
                 songsURL = musicList!!.get(number!!).songURL
-
 
                 // hiển thị dữ liệu trên Song Name ra màn hình ScreenFragment
                 binding.tvSongName.text = song_name
@@ -127,9 +125,25 @@ class ScreenFragment : Fragment() {
                     .load(image_url)
                     .into(binding.imgSong)
 
+
+                mediaPlayer = MediaPlayer()
+                try {
+                    mediaPlayer!!.setDataSource(musicList!!.get(number!!).songURL)
+                    mediaPlayer!!.prepare()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                // Bắt đầu phát nhạc
+                displayTextView()
+                mediaPlayer!!.start()
+                startAnimation()
+                SetTimeTotal()
+                capNhatTimeBaiHat()
+                binding.btnPlay.setImageResource(R.drawable.ic_pause)
+
+
 //Button Play
 
-                // Code xử lý sau khi delay 3 giây
                 binding.btnPlay.setOnClickListener {
 
 //                    capNhatTimeBaiHat()
