@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.Photo
+import com.example.firebasemusicplayer.model.entity.Photo
 
 class PhotoAdapter(private val mContext: Context, mListPhoto: List<Photo>?) :
     PagerAdapter() {

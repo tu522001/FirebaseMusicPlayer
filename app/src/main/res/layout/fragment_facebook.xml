@@ -9,7 +9,6 @@
         tools:context=".view.login.FacebookFragment">
 
 
-
         <ImageView
             android:id="@+id/img_avatar_facebook"
             android:layout_width="60dp"
@@ -51,43 +50,32 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="450dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-            android:layout_width="300dp"
-            android:layout_height="450dp">
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name">
 
             <TextView
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:id="@+id/txtThietLap"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textSize="18dp"
-                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thiết lập" />
-
-
-            <androidx.cardview.widget.CardView
-                app:layout_constraintTop_toBottomOf="@+id/txtThietLap"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
+                android:text="Thiết lập"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="-25dp"
-                tools:layout_editor_absoluteY="3dp">
-
+                app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="10dp"
+                    android:foregroundGravity="center"
                     android:id="@+id/rcv_Tools"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -95,11 +83,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtThietLap"
                     app:layout_constraintVertical_bias="0.32"
                     tools:listitem="@layout/item_layout_tools" />
-            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

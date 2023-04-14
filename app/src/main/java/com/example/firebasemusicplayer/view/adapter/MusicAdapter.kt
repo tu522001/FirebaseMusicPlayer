@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.Music
+import com.example.firebasemusicplayer.model.entity.Music
 //import com.squareup.picasso.Picasso
 
 class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {

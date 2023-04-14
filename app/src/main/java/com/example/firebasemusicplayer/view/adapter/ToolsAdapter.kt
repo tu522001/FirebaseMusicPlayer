@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.Music
-import com.example.firebasemusicplayer.model.Tools
+import com.example.firebasemusicplayer.model.entity.Tools
 
 class ToolsAdapter(listTools: List<Tools>?) : RecyclerView.Adapter<ToolsAdapter.ToolsViewHolder>() {
     private val listTools: List<Tools>?
@@ -35,12 +33,12 @@ class ToolsAdapter(listTools: List<Tools>?) : RecyclerView.Adapter<ToolsAdapter.
 
     inner class ToolsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var imageView: ImageView
-        private var tvSong: TextView
+        private var tvToolsUser: TextView
 
 
         init {
             imageView = itemView.findViewById(R.id.imgViewTools)
-            tvSong = itemView.findViewById(R.id.txtViewTools)
+            tvToolsUser = itemView.findViewById(R.id.txtViewTools)
 
             itemView.setOnClickListener {
                 if (onItemClickListener != null) {
@@ -51,7 +49,7 @@ class ToolsAdapter(listTools: List<Tools>?) : RecyclerView.Adapter<ToolsAdapter.
 
         fun bind(tools: Tools) {
             imageView.setImageResource(tools.image)
-            tvSong.text = tools.text
+            tvToolsUser.text = tools.text
         }
     }
 

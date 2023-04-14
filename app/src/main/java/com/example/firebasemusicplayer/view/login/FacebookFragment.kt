@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentFacebookBinding
-import com.example.firebasemusicplayer.model.Tools
+import com.example.firebasemusicplayer.model.entity.Tools
 import com.example.firebasemusicplayer.view.adapter.ToolsAdapter
 import com.facebook.AccessToken
 import com.facebook.GraphRequest

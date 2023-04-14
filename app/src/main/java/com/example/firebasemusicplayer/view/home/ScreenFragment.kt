@@ -1,7 +1,6 @@
 package com.example.firebasemusicplayer.view.home
 
 import android.media.MediaPlayer
-import android.media.tv.TvContract.Programs.Genres.MUSIC
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -18,14 +17,10 @@ import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
-import com.example.firebasemusicplayer.model.Music
-import com.facebook.AccessToken
+import com.example.firebasemusicplayer.model.entity.Music
 import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
-import com.facebook.share.model.ShareMedia
-import com.facebook.share.model.ShareMediaContent
 import com.facebook.share.widget.ShareDialog
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.net.MediaType
 import java.io.IOException
 import java.text.SimpleDateFormat
 

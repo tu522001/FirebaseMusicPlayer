@@ -1,11 +1,10 @@
 package com.example.firebasemusicplayer.viewmodel
 
 import android.text.TextUtils
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.firebasemusicplayer.model.User
+import com.example.firebasemusicplayer.model.entity.User
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInViewModel : ViewModel() {

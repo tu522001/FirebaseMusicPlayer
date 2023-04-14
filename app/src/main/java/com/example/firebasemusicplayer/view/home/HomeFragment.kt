@@ -20,9 +20,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentHomeBinding
-import com.example.firebasemusicplayer.model.Music
-import com.example.firebasemusicplayer.model.Photo
-import com.example.firebasemusicplayer.model.Singer
+import com.example.firebasemusicplayer.model.entity.Music
+import com.example.firebasemusicplayer.model.entity.Photo
+import com.example.firebasemusicplayer.model.entity.Singer
 import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.view.adapter.MusicAdapter
 import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
         val linearLayoutManager1 = LinearLayoutManager(context)
         recyclerViewSinger?.layoutManager = linearLayoutManager1
 
-//        getListUsers3()
+
 
         // RecyclerViewSinger
         recyclerViewSinger = binding.singerRecyclerView.findViewById(R.id.singerRecyclerView)

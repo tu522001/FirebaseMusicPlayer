@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.Singer
+import com.example.firebasemusicplayer.model.entity.Singer
 
 class SingerAdapter (singerList: List<Singer>?) : RecyclerView.Adapter<SingerAdapter.SingerViewHolder>() {
 

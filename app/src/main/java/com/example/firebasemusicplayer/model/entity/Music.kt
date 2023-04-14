@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.model
+package com.example.firebasemusicplayer.model.entity
 
 import android.os.Parcelable
 

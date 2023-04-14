@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.model
+package com.example.firebasemusicplayer.model.entity
 
 import com.example.firebasemusicplayer.R
 

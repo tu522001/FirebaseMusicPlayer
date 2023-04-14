@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSignInBinding
-import com.example.firebasemusicplayer.model.User
+import com.example.firebasemusicplayer.model.entity.User
 import com.example.firebasemusicplayer.viewmodel.SignInViewModel
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -21,10 +21,6 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-
-
-//import kotlinx.android.synthetic.main.fragment_sign_in.*
-//import kotlinx.android.synthetic.main.fragment_sign_in.view.*
 
 
 class SignInFragment : Fragment() {
@@ -49,12 +45,11 @@ class SignInFragment : Fragment() {
 
         viewModel.isAuthenticated.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
-//                Toast.makeText(
-//                    requireContext(), "User logged in successfully",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-                findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
+                if (binding.emails.text.toString() == "admin123@gmail.com" && (binding.passwords.text.toString() == "admin123")){
+                    findNavController().navigate(R.id.action_signInFragment_to_adminFragment)
+                }else{
+                    findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
+                }
             } else {
                 Toast.makeText(
                     requireContext(), "Log in Error: ",

@@ -1,9 +1,9 @@
 package com.example.firebasemusicplayer.model.data
 
 import android.util.Log
-import com.example.firebasemusicplayer.model.Music
-import com.example.firebasemusicplayer.model.Photo
-import com.example.firebasemusicplayer.model.Singer
+import com.example.firebasemusicplayer.model.entity.Music
+import com.example.firebasemusicplayer.model.entity.Photo
+import com.example.firebasemusicplayer.model.entity.Singer
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
