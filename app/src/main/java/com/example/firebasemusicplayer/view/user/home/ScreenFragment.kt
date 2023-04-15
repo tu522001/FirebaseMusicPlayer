@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.home
+package com.example.firebasemusicplayer.view.user.home
 
 import android.media.MediaPlayer
 import android.net.Uri
@@ -143,10 +143,7 @@ class ScreenFragment : Fragment() {
 
 
 //Button Play
-
                 binding.btnPlay.setOnClickListener {
-
-//                    capNhatTimeBaiHat()
                     if (mediaPlayer!!.isPlaying) {
                         // Nếu đang phát -> pause -> đổi hình play
                         mediaPlayer!!.pause()
@@ -154,7 +151,6 @@ class ScreenFragment : Fragment() {
                         binding.btnPlay.setImageResource(R.drawable.ic_play)
                     } else {
                         displayTextView()
-
                         /**
                          *   (+) "mediaPlayer!!.currentPosition" : là vị trí hiện tại của mediaPlayer trong quá trình phát nhạc, tính bằng mili giây (ms).
                          *   Nếu giá trị này lớn hơn 0, tức là mediaPlayer đã được phát ít nhất một phần của bài hát.

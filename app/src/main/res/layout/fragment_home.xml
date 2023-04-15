@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.home.HomeFragment">
+    tools:context=".view.user.home.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
@@ -133,9 +133,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:backgroundTint="@color/white"
                             android:id="@+id/img_avatar_facebook"
                             android:layout_width="25dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="25dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"

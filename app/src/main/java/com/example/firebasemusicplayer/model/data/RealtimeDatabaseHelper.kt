@@ -36,7 +36,7 @@ class RealtimeDatabaseHelper {
                         musicList.add(it)
                     }
 
-                    Log.d("EEE", "dataSnapshot : " + dataSnapshot)
+                    Log.d("YYY", "musicList : " + musicList)
                     Log.d("RRR", "snapshot.children : " + snapshot.children)
                 }
                 onSuccess(musicList)
@@ -96,4 +96,5 @@ class RealtimeDatabaseHelper {
 
         })
     }
+
 }

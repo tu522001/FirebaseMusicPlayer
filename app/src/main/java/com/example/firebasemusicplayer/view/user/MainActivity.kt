@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view
+package com.example.firebasemusicplayer.view.user
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

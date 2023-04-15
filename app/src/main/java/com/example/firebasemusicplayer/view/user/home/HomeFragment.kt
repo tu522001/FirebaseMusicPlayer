@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.home
+package com.example.firebasemusicplayer.view.user.home
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -24,6 +24,7 @@ import com.example.firebasemusicplayer.model.entity.Music
 import com.example.firebasemusicplayer.model.entity.Photo
 import com.example.firebasemusicplayer.model.entity.Singer
 import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
+import com.example.firebasemusicplayer.model.entity.User
 import com.example.firebasemusicplayer.view.adapter.MusicAdapter
 import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
 import com.example.firebasemusicplayer.view.adapter.SingerAdapter
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
     private var musicAdapter: MusicAdapter? = null
     private var singerAdapter: SingerAdapter? = null
 
-    private var mViewPager2 : ViewPager2? = null
+    private var mViewPager2: ViewPager2? = null
     private var mbottomNavigationView: BottomNavigationView? = null
     private var photoAdapter: PhotoAdapter? = null
     private var musicList: ArrayList<Music>? = null
@@ -66,7 +67,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var url_avatar: String
 
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
 
     private var mTimer: Timer? = null
 
@@ -75,7 +76,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-         binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+        binding = DataBindingUtil.inflate<FragmentHomeBinding>(
             inflater,
             R.layout.fragment_home,
             container,
@@ -104,7 +105,6 @@ class HomeFragment : Fragment() {
         getListUsers1()
         val linearLayoutManager1 = LinearLayoutManager(context)
         recyclerViewSinger?.layoutManager = linearLayoutManager1
-
 
 
         // RecyclerViewSinger
@@ -153,8 +153,8 @@ class HomeFragment : Fragment() {
         })
 
 
-        // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
 
+        // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
 
         val bundle = arguments
 // Kiểm tra nếu bundle không null và có chứa key "Key_url_avatar_facebook"
@@ -165,15 +165,25 @@ class HomeFragment : Fragment() {
                 .load(url_avatar)
                 .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
                 .into(binding.imgAvatarFacebook)
-        }
 
+            binding.imgAvatarFacebook.setOnClickListener {
+                if (bundle != null && bundle.containsKey("Key_url_avatar_facebook")) {
+                    Glide.with(this)
+                        .load(url_avatar)
+                        .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                        .into(binding.imgAvatarFacebook)
+                    findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
 
+                }
 
-
-
-
-        binding.imgAvatarFacebook.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
+            }
+        }else{
+            Glide.with(this)
+                .load(R.drawable.administrator).apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                .into(binding.imgAvatarFacebook)
+            binding.imgAvatarFacebook.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_adminFragment2)
+            }
         }
 
 
@@ -209,6 +219,8 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
+
     private fun search(query: String) {
         val databaseReference = FirebaseDatabase.getInstance().getReference("Song")
 
@@ -239,110 +251,6 @@ class HomeFragment : Fragment() {
                 this.musicList?.addAll(musicList)
                 musicAdapter?.notifyDataSetChanged()
                 Log.d("EEE", "arrayList" + musicList!!.size)
-
-
-                binding.imgBtnSetting.setOnClickListener {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                        if (getApplicationContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                            val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            requestPermissions(permissions, 1)
-                        } else {
-                            //get data from edit text
-//                            userList = ArrayList()
-//                            userList?.add(Music(1, "a", "b", "1", "1"))
-//                            userList?.add(Music(2, "a", "b", "2", "2"))
-//                            userList?.add(Music(3, "a", "b", "3", "3"))
-//                            userList?.add(Music(4, "a", "b", "4", "4"))
-//                            userList?.add(Music(5, "a", "b", "5", "5"))
-//                            userList?.add(Music(6, "a", "b", "6", "6"))
-//                            userList?.add(Music(7, "a", "b", "7", "7"))
-//                            userList?.add(Music(8, "a", "b", "8", "8"))
-
-                            if (musicList!!.isNotEmpty()) {
-                                val wb: Workbook = HSSFWorkbook()
-                                var cell: Cell
-                                val sheet = wb.createSheet("Demo Excel Sheet")
-                                val row = sheet.createRow(0)
-
-                                cell = row.createCell(0)
-                                cell.setCellValue("id")
-
-                                cell = row.createCell(1)
-                                cell.setCellValue("imageURL")
-
-                                cell = row.createCell(2)
-                                cell.setCellValue("singerName")
-
-                                cell = row.createCell(3)
-                                cell.setCellValue("songName")
-
-                                cell = row.createCell(4)
-                                cell.setCellValue("songURL")
-
-                                sheet.setColumnWidth(0, 20 * 100)
-                                sheet.setColumnWidth(1, 30 * 1000)
-                                sheet.setColumnWidth(2, 30 * 300)
-                                sheet.setColumnWidth(3, 30 * 300)
-                                sheet.setColumnWidth(4, 30 * 1000)
-
-                                for (userModel in musicList!!) {
-                                    val row1 = sheet.createRow(musicList!!.indexOf(userModel) + 1)
-                                    cell = row1.createCell(0)
-                                    cell.setCellValue(userModel.id.toString())
-                                    cell = row1.createCell(1)
-                                    cell.setCellValue(userModel.imageURL)
-                                    cell = row1.createCell(2)
-                                    cell.setCellValue(userModel.singerName)
-                                    cell = row1.createCell(3)
-                                    cell.setCellValue(userModel.songName)
-                                    cell = row1.createCell(4)
-                                    cell.setCellValue(userModel.songURL)
-                                }
-
-                                val folderName = "Songs"
-                                val fileName = folderName + System.currentTimeMillis() + ".xls"
-                                val path = Environment.getExternalStorageDirectory()
-                                    .toString() + File.separator + folderName + File.separator + fileName
-
-                                val file =
-                                    File(
-                                        Environment.getExternalStorageDirectory()
-                                            .toString() + File.separator + folderName
-                                    )
-                                if (!file.exists()) {
-                                    file.mkdirs()
-                                }
-
-                                var outputStream: FileOutputStream? = null
-                                try {
-                                    outputStream = FileOutputStream(path)
-                                    wb.write(outputStream)
-                                    Toast.makeText(
-                                        getApplicationContext(),
-                                        "Excel Created in $path",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                        .show()
-                                } catch (e: IOException) {
-                                    e.printStackTrace()
-                                    Toast.makeText(
-                                        getApplicationContext(),
-                                        "Failed to create Excel file",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                } finally {
-                                    try {
-                                        outputStream?.close()
-                                    } catch (e: IOException) {
-                                        e.printStackTrace()
-                                    }
-                                }
-                            } else {
-//                        Toast.makeText(this, "list are empty", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
             },
             onFailure = { exception ->
                 Toast.makeText(context, "Get list users failed", Toast.LENGTH_SHORT).show()
@@ -371,7 +279,7 @@ class HomeFragment : Fragment() {
     private fun getListImage() {
 
         realtimeDatabaseHelper2.getListImageFromRealTimeDatabase(
-            onSuccess = {  photoList->
+            onSuccess = { photoList ->
                 // Update UI with musicList
                 this.photoList?.clear()
                 this.photoList?.addAll(photoList)

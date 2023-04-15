@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddSongFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.admin.AddSongFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/ConstraintLayout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-</FrameLayout>
+       <ImageButton
+           android:id="@+id/img_btn_back"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="10dp"
+           android:layout_marginTop="10dp"
+           android:background="@color/white"
+           android:src="@drawable/ic_back"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="@+id/ConstraintLayout" />
+
+       <ImageView
+           android:id="@+id/iv_import"
+           android:layout_width="wrap_content"
+           android:layout_height="90dp"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="50dp"
+           android:src="@drawable/administrator"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.498"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <TextView
+           android:textStyle="bold"
+           android:textSize="20sp"
+           android:textColor="@color/black"
+           android:id="@+id/txtUserName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:text="Admin"
+           app:layout_constraintEnd_toEndOf="@+id/iv_import"
+           app:layout_constraintStart_toStartOf="@+id/iv_import"
+           app:layout_constraintTop_toBottomOf="@+id/iv_import" />
+
+       <EditText
+           android:gravity="center"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/txtUserName"
+           android:id="@+id/editTextID"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textPersonName"
+           android:hint="ID" />
+
+       <EditText
+           android:gravity="center"
+           android:layout_marginTop="30dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/editTextID"
+           android:id="@+id/editTextImageURL"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textPersonName"
+           android:hint="ImageURL" />
+
+       <EditText
+           android:gravity="center"
+           android:layout_marginTop="30dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/editTextImageURL"
+           android:id="@+id/editTextSingerName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textPersonName"
+           android:hint="SingerName" />
+
+       <EditText
+           android:gravity="center"
+           android:layout_marginTop="30dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/editTextSingerName"
+           android:id="@+id/editTextSongName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textPersonName"
+           android:hint="SongName" />
+
+       <EditText
+           android:gravity="center"
+           android:layout_marginTop="30dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/editTextSongName"
+           android:id="@+id/editTextsongURL"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textPersonName"
+           android:hint="SongURL" />
+
+       <Button
+           android:backgroundTint="@color/teal_200"
+           android:layout_marginTop="30dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/editTextsongURL"
+           android:id="@+id/btn_confirm"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="confirm" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

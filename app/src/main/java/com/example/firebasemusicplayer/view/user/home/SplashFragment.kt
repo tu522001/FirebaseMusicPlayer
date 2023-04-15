@@ -1,6 +1,5 @@
-package com.example.firebasemusicplayer.view.home
+package com.example.firebasemusicplayer.view.user.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,10 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSplashBinding
-import com.example.firebasemusicplayer.view.home.SplashFragment
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class SplashFragment : Fragment() {
 

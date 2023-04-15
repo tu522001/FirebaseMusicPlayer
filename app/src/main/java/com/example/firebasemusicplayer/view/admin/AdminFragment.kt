@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.home
+package com.example.firebasemusicplayer.view.admin
 
 import android.database.DatabaseUtils
 import android.os.Bundle
@@ -48,10 +48,9 @@ class AdminFragment : Fragment() {
                 Log.d("PPP", "position : " + position)
 
                 when (position) {
-//                    0 -> findNavController().navigate(R.id.action_adminFragment_to_homeFragment)
-//                    1 -> findNavController().navigate(R.id.action_adminFragment_to_helpFragment)
+                    0 -> findNavController().navigate(R.id.action_adminFragment_to_homeFragment3)
+                    1 -> findNavController().navigate(R.id.action_adminFragment_to_outputFileExcelFragment)
 //                    2 -> findNavController().navigate(R.id.action_adminFragment_to_helpFragment)
-
                     3 -> findNavController().navigate(R.id.action_adminFragment_to_versionFragment)
                     4 -> findNavController().navigate(R.id.action_adminFragment_to_helpFragment)
                     5 -> findNavController().navigate(R.id.action_adminFragment_to_termsOfServiceFragment)

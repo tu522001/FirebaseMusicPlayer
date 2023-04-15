@@ -11,8 +11,8 @@ class SignUpViewModel : ViewModel() {
     val signUpSuccess: LiveData<Boolean>
         get() = _signUpSuccess
 
-    fun signUp(email: String, password: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
+    fun signUp(name: String, email: String, phone: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty()) {
             val auth = FirebaseAuth.getInstance()
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->

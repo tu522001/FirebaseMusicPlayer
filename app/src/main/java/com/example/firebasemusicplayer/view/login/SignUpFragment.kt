@@ -13,12 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSignUpBinding
 import com.example.firebasemusicplayer.viewmodel.SignUpViewModel
+import com.google.firebase.database.*
 
 
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +36,52 @@ class SignUpFragment : Fragment() {
 
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
+
+        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://fir-musicplayer-e2d98-default-rtdb.firebaseio.com/")
         binding.btnConfirm.setOnClickListener {
+
+            // get data from EditText into String variables
+            val name = binding.edtName.text.toString()
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
-            signUpViewModel.signUp(email, password)
+            val phone = binding.edtPhone.text.toString()
+
+            //check if user fill all the fields before sending data to firebase
+            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()){
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+
+            // check if passwords are matching with each other
+            // if not matching with each other then show a toast message
+
+            else{
+
+                databaseReference.child("users").addListenerForSingleValueEvent( object :
+                    ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.hasChild(phone)){
+                            Toast.makeText(requireContext(), "Phone is already registered", Toast.LENGTH_SHORT).show()
+                        }else{
+                            // sending data to  firebase Realtime Database
+                            // we are using phone number as unique identity of every user
+                            // so all the other details of user comes under phone number
+
+                            databaseReference.child("users").child(phone).child("name").setValue(name)
+                            databaseReference.child("users").child(phone).child("email").setValue(email)
+                            databaseReference.child("users").child(phone).child("password").setValue(password)
+                            databaseReference.child("users").child(phone).child("phone").setValue(phone)
+                        }
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
+            }
+
+            signUpViewModel.signUp(name,email,phone,password)
         }
 
         binding.imgBtnLogout.setOnClickListener{
@@ -51,18 +95,13 @@ class SignUpFragment : Fragment() {
                     requireContext(),
                     "Đăng ký tài khoản thành công.",
                     Toast.LENGTH_SHORT
+
                 ).show()
                 // Tiếp tục với các bước tiếp theo
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Đăng ký thất bại.",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         })
 
         return binding.root
     }
-}
 
+}
