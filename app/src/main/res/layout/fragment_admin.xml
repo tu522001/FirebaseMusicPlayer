@@ -10,17 +10,6 @@
        tools:context=".view.admin.AdminFragment">
 
 
-      <ImageButton
-          android:id="@+id/img_btn_back"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="10dp"
-          android:layout_marginTop="10dp"
-          android:background="@color/white"
-          android:src="@drawable/ic_back"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/ConstraintLayout" />
-
       <ImageView
           android:id="@+id/iv_import"
           android:layout_width="wrap_content"

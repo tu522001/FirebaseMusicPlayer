@@ -21,6 +21,33 @@ class RealtimeDatabaseHelper {
 
 
     // callback
+//    fun getListUsersFromRealTimeDatabase(
+//        onSuccess: (List<Music>) -> Unit,
+//        onFailure: (Exception) -> Unit
+//    ) {
+//        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val musicList = mutableListOf<Music>()
+//
+//                var i: Int = 1
+//                for (dataSnapshot in snapshot.children) {
+//                    val music = dataSnapshot.getValue(Music::class.java)
+//                    music?.let {
+//                        musicList.add(it)
+//                    }
+//
+//                    Log.d("YYY", "musicList : " + musicList)
+//                    Log.d("RRR", "snapshot.children : " + snapshot.children)
+//                }
+//                onSuccess(musicList)
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                onFailure(error.toException())
+//            }
+//        })
+//    }
     fun getListUsersFromRealTimeDatabase(
         onSuccess: (List<Music>) -> Unit,
         onFailure: (Exception) -> Unit
@@ -29,15 +56,14 @@ class RealtimeDatabaseHelper {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val musicList = mutableListOf<Music>()
 
-                var i: Int = 1
                 for (dataSnapshot in snapshot.children) {
                     val music = dataSnapshot.getValue(Music::class.java)
                     music?.let {
+                        // kiểm tra và chuyển đổi các thuộc tính số nguyên nếu cần thiết
+                        it.id = it.id.toString().toIntOrNull() ?: 0
+                        // thêm đối tượng Music vào danh sách
                         musicList.add(it)
                     }
-
-                    Log.d("YYY", "musicList : " + musicList)
-                    Log.d("RRR", "snapshot.children : " + snapshot.children)
                 }
                 onSuccess(musicList)
 
@@ -48,6 +74,8 @@ class RealtimeDatabaseHelper {
             }
         })
     }
+
+
 
     // callback
     fun getListUsersFromRealTimeDatabase1(

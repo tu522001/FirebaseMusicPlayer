@@ -50,7 +50,7 @@ class AdminFragment : Fragment() {
                 when (position) {
                     0 -> findNavController().navigate(R.id.action_adminFragment_to_homeFragment3)
                     1 -> findNavController().navigate(R.id.action_adminFragment_to_outputFileExcelFragment)
-//                    2 -> findNavController().navigate(R.id.action_adminFragment_to_helpFragment)
+                    2 -> findNavController().navigate(R.id.action_adminFragment_to_addSongFragment)
                     3 -> findNavController().navigate(R.id.action_adminFragment_to_versionFragment)
                     4 -> findNavController().navigate(R.id.action_adminFragment_to_helpFragment)
                     5 -> findNavController().navigate(R.id.action_adminFragment_to_termsOfServiceFragment)
