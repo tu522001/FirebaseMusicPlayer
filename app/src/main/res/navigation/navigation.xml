@@ -152,6 +152,9 @@
         <action
             android:id="@+id/action_termsOfServiceFragment_to_facebookFragment3"
             app:destination="@id/facebookFragment3" />
+        <action
+            android:id="@+id/action_termsOfServiceFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
@@ -161,6 +164,9 @@
         <action
             android:id="@+id/action_helpFragment_to_facebookFragment3"
             app:destination="@id/facebookFragment3" />
+        <action
+            android:id="@+id/action_helpFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/securityFragment"
@@ -170,6 +176,9 @@
         <action
             android:id="@+id/action_securityFragment_to_facebookFragment3"
             app:destination="@id/facebookFragment3" />
+        <action
+            android:id="@+id/action_securityFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/versionFragment"
@@ -179,6 +188,9 @@
         <action
             android:id="@+id/action_versionFragment_to_facebookFragment3"
             app:destination="@id/facebookFragment3" />
+        <action
+            android:id="@+id/action_versionFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/outputFileExcelFragment"

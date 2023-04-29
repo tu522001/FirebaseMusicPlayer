@@ -2,6 +2,7 @@ package com.example.firebasemusicplayer.view.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,9 +28,9 @@ class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInViewModel
-
+    private lateinit var bundle : Bundle
     private lateinit var callbackManager : CallbackManager
-
+    private lateinit var signInData : User
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,15 +41,30 @@ class SignInFragment : Fragment() {
 
         binding.loginbtn.setOnClickListener {
             val signInData = User(binding.emails.text.toString(), binding.passwords.text.toString())
+
+
+
             viewModel.authenticateUser(signInData)
         }
 
         viewModel.isAuthenticated.observe(viewLifecycleOwner, Observer { success ->
+
+            bundle = Bundle().apply {
+                putString("Key_email", "example@email.com")
+            }
+            val signInFragment = SignInFragment()
+            Log.d("RRR","signInFragment : "+signInFragment)
+            signInFragment.arguments = bundle
+
+            Log.d("RRR","signInFragment.arguments : "+signInFragment.arguments)
+            Log.d("RRR","bundle : "+bundle)
+
             if (success) {
                 if (binding.emails.text.toString() == "admin123@gmail.com" && (binding.passwords.text.toString() == "admin123")){
                     findNavController().navigate(R.id.action_signInFragment_to_adminFragment)
                 }else{
-                    findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
+                    findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3,bundle)
+                    Log.d("AAAS","signInDatassss : "+bundle)
                 }
             } else {
                 Toast.makeText(
@@ -63,10 +79,11 @@ class SignInFragment : Fragment() {
         }
 
 
-        callbackManager = CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create()
 
         var accessToken = AccessToken.getCurrentAccessToken()
         if (accessToken != null && !accessToken.isExpired){
+            accessToken.token.toString()
             findNavController().navigate(R.id.action_signInFragment_to_facebookFragment3)
         }
 

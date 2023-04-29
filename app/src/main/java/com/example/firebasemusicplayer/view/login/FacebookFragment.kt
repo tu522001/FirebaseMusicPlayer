@@ -70,6 +70,7 @@ class FacebookFragment : Fragment() {
                     // Đóng gói đường dẫn ảnh đại diện vào Bundle để truyền dữ liệu sang Activity khác (nếu cần).
                     bundle_url_avatar = Bundle().apply {
                         putString("Key_url_avatar_facebook", url)
+                        putString("Key_User","user")
                     }
 
                 } catch (e: JSONException) {

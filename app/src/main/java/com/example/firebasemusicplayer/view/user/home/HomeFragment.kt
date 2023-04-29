@@ -30,7 +30,9 @@ import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
 import com.example.firebasemusicplayer.view.adapter.SingerAdapter
 import com.facebook.FacebookSdk.getApplicationContext
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Workbook
@@ -64,7 +66,7 @@ class HomeFragment : Fragment() {
     private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
     private lateinit var realtimeDatabaseHelper1: RealtimeDatabaseHelper
     private lateinit var realtimeDatabaseHelper2: RealtimeDatabaseHelper
-
+    private lateinit var user : User
     private lateinit var url_avatar: String
 
     private lateinit var binding: FragmentHomeBinding
@@ -153,11 +155,19 @@ class HomeFragment : Fragment() {
         })
 
 
+        // gọi giá trị email của firebase ra thông qua phương thức dưới đây
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
+        val userEmail = currentUser?.email
+        println(userEmail)
+
+//        var user : User = User()
 
         // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
 
         val bundle = arguments
 // Kiểm tra nếu bundle không null và có chứa key "Key_url_avatar_facebook"
+
         if (bundle != null && bundle.containsKey("Key_url_avatar_facebook")) {
             val url_avatar = bundle.getString("Key_url_avatar_facebook")
             // Sử dụng Glide để hiển thị ảnh đại diện
@@ -173,16 +183,26 @@ class HomeFragment : Fragment() {
                         .apply(RequestOptions().override(Target.SIZE_ORIGINAL))
                         .into(binding.imgAvatarFacebook)
                     findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
-
                 }
-
             }
         }else{
-            Glide.with(this)
-                .load(R.drawable.administrator).apply(RequestOptions().override(Target.SIZE_ORIGINAL))
-                .into(binding.imgAvatarFacebook)
-            binding.imgAvatarFacebook.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_adminFragment2)
+            user = User("admin123@gmail.com","admin123")
+            if ((bundle == null) && (userEmail != user.email)){
+                Glide.with(this)
+                    .load(R.drawable.user).apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                    .into(binding.imgAvatarFacebook)
+                binding.imgAvatarFacebook.setOnClickListener {
+                    findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
+                }
+
+
+            }else if (user.email == "admin123@gmail.com" && user.password == "admin123" ){
+                Glide.with(this)
+                    .load(R.drawable.administrator).apply(RequestOptions().override(Target.SIZE_ORIGINAL))
+                    .into(binding.imgAvatarFacebook)
+                binding.imgAvatarFacebook.setOnClickListener {
+                    findNavController().navigate(R.id.action_homeFragment_to_adminFragment2)
+                }
             }
         }
 

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentHelpBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class HelpFragment : Fragment() {
 
@@ -20,8 +21,21 @@ class HelpFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_help,container,false)
 
-        binding.imgBtnBack.setOnClickListener{
-            findNavController().navigate(R.id.action_helpFragment_to_facebookFragment3)
+        // gọi giá trị email của firebase ra thông qua phương thức dưới đây
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
+        val userEmail = currentUser?.email
+
+        println(userEmail)
+
+        if (userEmail == "admin123@gmail.com"){
+            binding.imgBtnBack.setOnClickListener {
+                findNavController().navigate(R.id.action_helpFragment_to_adminFragment)
+            }
+        }else{
+            binding.imgBtnBack.setOnClickListener{
+                findNavController().navigate(R.id.action_helpFragment_to_facebookFragment3)
+            }
         }
         return binding.root
     }
