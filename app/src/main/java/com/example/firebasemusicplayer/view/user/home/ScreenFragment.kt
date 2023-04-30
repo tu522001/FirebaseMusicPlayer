@@ -1,8 +1,13 @@
 package com.example.firebasemusicplayer.view.user.home
 
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Context.DOWNLOAD_SERVICE
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,23 +16,26 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
-import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
+import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.model.entity.Music
+import com.example.firebasemusicplayer.view.user.download.DownloadService
 import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
+import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 
 
 class ScreenFragment : Fragment() {
-
+    private lateinit var manager : DownloadManager
     private var count: Int = 0
     private var number: Int = 0
     private lateinit var song_name: String
@@ -84,6 +92,32 @@ class ScreenFragment : Fragment() {
             ShareDialog.show(this,shareContent)
 
 
+        }
+
+        binding.btnDownload.setOnClickListener {
+            // Tải hình về
+            val downloadManager =
+                context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            val request = DownloadManager.Request(Uri.parse(songsURL))
+                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                .setTitle(songsURL)
+                .setDescription("Đang tải xuống ${songsURL}")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_PICTURES,
+                    "MyPic/${songsURL}"
+                )
+            val downloadId = downloadManager.enqueue(request)
+//            val downloadId = downloadManager.enqueue(request)
+//            listener.onDownloadClick(downloadId)
+//            Log.d("EEE", "downloadId : " + downloadId)
+//
+//            // Thêm hình đã tải vào danh sách
+//            val downloadedImage = DownloadedImage(
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path,
+//                image.url
+//            )
+//            downloadedImages.add(downloadedImage)
         }
 
         return binding.root

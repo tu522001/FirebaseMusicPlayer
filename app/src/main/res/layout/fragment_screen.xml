@@ -27,14 +27,16 @@
                 android:background="@drawable/ic_keyboard"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            <Button
+            <ImageButton
+                android:id="@+id/btn_share"
+                android:background="#FFFFFF"
+                android:src="@drawable/ic_share"
                 android:layout_marginTop="7dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/ic_more_vert"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </RelativeLayout>
 
@@ -45,7 +47,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_image"
-            android:src="@drawable/soobin"
+            android:src="@drawable/loading32px"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,19 +107,19 @@
                     android:text="Soobin Hoàng Sơn"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/btn_share"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_like"
+                    app:layout_constraintStart_toEndOf="@+id/btn_like"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_download"
                     app:layout_constraintTop_toBottomOf="@+id/tv_song_name" />
 
                 <ImageButton
                     android:layout_marginEnd="50dp"
-                    android:id="@+id/btn_share"
+                    android:id="@+id/btn_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:background="#FFFFFF"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_favorite_border"
                     android:text="Button"
                     app:layout_constraintEnd_toStartOf="@+id/tv_song_name"
                     app:layout_constraintHorizontal_bias="0.51"
@@ -126,14 +128,15 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
+                    android:id="@+id/btn_download"
                     android:layout_marginStart="50dp"
-                    android:id="@+id/btn_like"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/icon_download3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#FFFFFF"
-                    android:src="@drawable/ic_favorite_border"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_song_name"
                     app:layout_constraintTop_toTopOf="parent"
