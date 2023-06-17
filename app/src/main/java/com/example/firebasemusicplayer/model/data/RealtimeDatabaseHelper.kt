@@ -1,6 +1,5 @@
 package com.example.firebasemusicplayer.model.data
 
-import android.util.Log
 import com.example.firebasemusicplayer.model.entity.Music
 import com.example.firebasemusicplayer.model.entity.Photo
 import com.example.firebasemusicplayer.model.entity.Singer
@@ -10,14 +9,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class RealtimeDatabaseHelper {
+object RealtimeDatabaseHelper {
     private val database = FirebaseDatabase.getInstance()
-    private val database1 = FirebaseDatabase.getInstance()
-    private val databaseListMusic = FirebaseDatabase.getInstance()
 
     private val myRef = database.getReference("Song")
-    private val myRef1 = database1.getReference("Singer")
-    private val myRef2 = databaseListMusic.getReference("ImageList")
+    private val myRef1 = database.getReference("Singer")
+    private val myRef2 = database.getReference("ImageList")
 
 
     // callback
@@ -48,7 +45,7 @@ class RealtimeDatabaseHelper {
 //            }
 //        })
 //    }
-    fun getListUsersFromRealTimeDatabase(
+    fun getAllSongsFromFirebase(
         onSuccess: (List<Music>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
@@ -66,7 +63,6 @@ class RealtimeDatabaseHelper {
                     }
                 }
                 onSuccess(musicList)
-
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -78,7 +74,7 @@ class RealtimeDatabaseHelper {
 
 
     // callback
-    fun getListUsersFromRealTimeDatabase1(
+    fun getAllSingersFromFirebase(
         onSuccess: (List<Singer>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
@@ -101,7 +97,7 @@ class RealtimeDatabaseHelper {
     }
 
     // callback image
-    fun getListImageFromRealTimeDatabase(
+    fun getAllImagesFromFirebase(
         onSuccess: (List<Photo>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {

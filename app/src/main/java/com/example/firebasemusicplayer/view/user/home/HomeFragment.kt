@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ import com.example.firebasemusicplayer.model.entity.User
 import com.example.firebasemusicplayer.view.adapter.MusicAdapter
 import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
 import com.example.firebasemusicplayer.view.adapter.SingerAdapter
+import com.example.firebasemusicplayer.viewmodel.HomeViewModel
 import com.facebook.FacebookSdk.getApplicationContext
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -44,28 +46,21 @@ import java.util.*
 
 class HomeFragment : Fragment() {
 
+    private val homeViewModel by viewModels<HomeViewModel>()
     private var recyclerViewMusic: RecyclerView? = null
     private var recyclerViewSinger: RecyclerView? = null
-    private var searchView: SearchView? = null
-    private var musicAdapter: MusicAdapter? = null
-    private var singerAdapter: SingerAdapter? = null
+
 
     private var mViewPager2: ViewPager2? = null
     private var mbottomNavigationView: BottomNavigationView? = null
     private var photoAdapter: PhotoAdapter? = null
-    private var musicList: ArrayList<Music>? = null
-    private var singerList: ArrayList<Singer>? = null
-    private var photoList: ArrayList<Photo>? = null
-    private var database: FirebaseDatabase? = null
-    private var database1: FirebaseDatabase? = null
-    private var databaseListMusic: FirebaseDatabase? = null
-    private var myRef: DatabaseReference? = null
-    private var myRef1: DatabaseReference? = null
-    private var myRef2: DatabaseReference? = null
+    private var musicList = mutableListOf<Music>()
+    private var singerList = mutableListOf<Singer>()
+    private var photoList = mutableListOf<Photo>()
+    private var  musicAdapter = MusicAdapter(musicList)
+    private var singerAdapter = SingerAdapter(singerList)
 
-    private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
-    private lateinit var realtimeDatabaseHelper1: RealtimeDatabaseHelper
-    private lateinit var realtimeDatabaseHelper2: RealtimeDatabaseHelper
+
     private lateinit var user : User
     private lateinit var url_avatar: String
 
@@ -78,64 +73,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate<FragmentHomeBinding>(
-            inflater,
-            R.layout.fragment_home,
-            container,
-            false
-        )
-
-        searchView = binding.searchView.findViewById(R.id.searchView)
-        recyclerViewMusic = binding.recyclerView.findViewById(R.id.recyclerView)
-        recyclerViewSinger = binding.recyclerView.findViewById(R.id.singerRecyclerView)
-
-        realtimeDatabaseHelper = RealtimeDatabaseHelper()
-        realtimeDatabaseHelper1 = RealtimeDatabaseHelper()
-        realtimeDatabaseHelper2 = RealtimeDatabaseHelper()
-
-        database = FirebaseDatabase.getInstance()
-        database1 = FirebaseDatabase.getInstance()
-
-        myRef = database?.getReference("Song")
-        myRef1 = database1?.getReference("Singer")
-        myRef2 = databaseListMusic?.getReference("ImageList")
-
-        getListUsers()
-        val linearLayoutManager = LinearLayoutManager(context)
-        recyclerViewMusic?.layoutManager = linearLayoutManager
-
-        getListUsers1()
-        val linearLayoutManager1 = LinearLayoutManager(context)
-        recyclerViewSinger?.layoutManager = linearLayoutManager1
-
-
-        // RecyclerViewSinger
-        recyclerViewSinger = binding.singerRecyclerView.findViewById(R.id.singerRecyclerView)
-        recyclerViewSinger?.setHasFixedSize(true)
-        recyclerViewSinger?.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-
-        musicList = ArrayList<Music>()
-        singerList = ArrayList<Singer>()
-        photoList = ArrayList<Photo>()
-
-
-        Log.d("QQQ", "arrayList" + musicList!!.size)
-        musicAdapter = MusicAdapter(musicList)
-        recyclerViewMusic?.adapter = musicAdapter
-
-        Log.d("QQQ", "arrayList" + singerList!!.size)
-        singerAdapter = SingerAdapter(singerList)
-        recyclerViewSinger?.adapter = singerAdapter
-
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        initView()
+        observeData()
+        initData()
         onItemClick()
 
-        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
@@ -145,7 +89,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 musicList!!.clear()
                 return if (newText.isEmpty()) {
-                    getListUsers()
+//                    getListUsers()
                     true
                 } else {
                     search(newText)
@@ -205,11 +149,15 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-
-
-        getListImage()
 //        photoList = getListImage()
+
+        return binding.root
+    }
+
+    private fun initView() {
+        binding.rcvSong?.adapter = musicAdapter
+        binding.rcvSinger?.adapter = singerAdapter
+
         photoAdapter = PhotoAdapter(requireContext(), photoList)
         binding.viewpager.adapter = photoAdapter
 
@@ -236,9 +184,39 @@ class HomeFragment : Fragment() {
             }
         }, 2000, 5000)
 
-        return binding.root
     }
 
+    private fun observeData() {
+        homeViewModel.listSong.observe(viewLifecycleOwner,::handleAllSongs)
+        homeViewModel.listPhoto.observe(viewLifecycleOwner,::handleAllImages)
+        homeViewModel.listSinger.observe(viewLifecycleOwner,::handleAllSingers)
+    }
+
+    private fun handleAllSingers(singers: List<Singer>) {
+        this.singerList?.clear()
+        this.singerList.addAll(singers)
+        singerAdapter.notifyDataSetChanged()
+    }
+
+    private fun handleAllImages(photos: List<Photo>) {
+        this.photoList?.clear()
+        this.photoList?.addAll(photos)
+        photoAdapter?.notifyDataSetChanged()
+    }
+
+    private fun handleAllSongs(songs: List<Music>) {
+        this.musicList?.clear()
+        this.musicList?.addAll(songs)
+        musicAdapter?.notifyDataSetChanged()
+    }
+
+    private fun initData() {
+        homeViewModel.apply {
+            fetchAllSongsFromFirebase()
+            fetchAllImagesFromFirebase()
+            fetchAllSingersFromFirebase()
+        }
+    }
 
 
     private fun search(query: String) {
@@ -261,56 +239,6 @@ class HomeFragment : Fragment() {
                     Log.e("DDD", "onCancelled", databaseError.toException())
                 }
             })
-    }
-
-    private fun getListUsers() {
-        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
-            onSuccess = { musicList ->
-                // Update UI with musicList
-                this.musicList?.clear()
-                this.musicList?.addAll(musicList)
-                musicAdapter?.notifyDataSetChanged()
-                Log.d("EEE", "arrayList" + musicList!!.size)
-            },
-            onFailure = { exception ->
-                Toast.makeText(context, "Get list users failed", Toast.LENGTH_SHORT).show()
-            }
-        )
-
-    }
-
-    private fun getListUsers1() {
-
-        realtimeDatabaseHelper1.getListUsersFromRealTimeDatabase1(
-            onSuccess = { singerList ->
-                // Update UI with musicList
-                this.singerList?.clear()
-                this.singerList?.addAll(singerList)
-                singerAdapter?.notifyDataSetChanged()
-                Log.d("EEE", "singerList" + singerList!!.size)
-
-            },
-            onFailure = { exception ->
-                Toast.makeText(context, "Get list users failed", Toast.LENGTH_SHORT).show()
-            }
-        )
-    }
-
-    private fun getListImage() {
-
-        realtimeDatabaseHelper2.getListImageFromRealTimeDatabase(
-            onSuccess = { photoList ->
-                // Update UI with musicList
-                this.photoList?.clear()
-                this.photoList?.addAll(photoList)
-                photoAdapter?.notifyDataSetChanged()
-                Log.d("EEE", "mListPhoto" + photoList!!.size)
-
-            },
-            onFailure = { exception ->
-                Toast.makeText(context, "Get list users failed", Toast.LENGTH_SHORT).show()
-            }
-        )
     }
 
     //     hàm xử lý sự kiện click vào các item ở trong recyclerView để phát nhạc

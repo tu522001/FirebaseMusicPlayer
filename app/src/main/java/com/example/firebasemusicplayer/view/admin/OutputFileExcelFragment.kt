@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.firebasemusicplayer.R
@@ -31,7 +30,6 @@ import java.util.ArrayList
 
 class OutputFileExcelFragment : Fragment() {
 
-    private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
     private lateinit var binding : FragmentOutputFileExcelBinding
     private var musicList: ArrayList<Music>? = null
 
@@ -47,10 +45,9 @@ class OutputFileExcelFragment : Fragment() {
             findNavController().navigate(R.id.action_outputFileExcelFragment_to_adminFragment)
         }
 
-        realtimeDatabaseHelper = RealtimeDatabaseHelper()
         musicList = ArrayList<Music>()
 
-        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(onSuccess = { musicList ->
+        RealtimeDatabaseHelper.getAllSongsFromFirebase(onSuccess = { musicList ->
             this.musicList?.clear()
             this.musicList?.addAll(musicList)
 

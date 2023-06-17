@@ -2,8 +2,6 @@ package com.example.firebasemusicplayer.view.user.home
 
 import android.app.DownloadManager
 import android.content.Context
-import android.content.Context.DOWNLOAD_SERVICE
-import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -16,7 +14,6 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,11 +22,9 @@ import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentScreenBinding
 import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.model.entity.Music
-import com.example.firebasemusicplayer.view.user.download.DownloadService
 import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
-import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 
@@ -44,7 +39,6 @@ class ScreenFragment : Fragment() {
     private var mediaPlayer: MediaPlayer? = null
     private var music: Music? = null
     private lateinit var binding: FragmentScreenBinding
-    private lateinit var realtimeDatabaseHelper: RealtimeDatabaseHelper
     private lateinit var songsURL : String
 
     override fun onCreateView(
@@ -59,8 +53,6 @@ class ScreenFragment : Fragment() {
             container,
             false
         )
-
-        realtimeDatabaseHelper = RealtimeDatabaseHelper()
         doSomethingWithListUsers()
         onClickPosition()
 
@@ -144,7 +136,7 @@ class ScreenFragment : Fragment() {
     }
 
     private fun doSomethingWithListUsers() {
-        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
+        RealtimeDatabaseHelper.getAllSongsFromFirebase(
             onSuccess = { musicList ->
 
                 music = musicList.get(number!!)
@@ -326,7 +318,7 @@ class ScreenFragment : Fragment() {
     }
 
     private fun capNhatTimeBaiHat() {
-        realtimeDatabaseHelper.getListUsersFromRealTimeDatabase(
+        RealtimeDatabaseHelper.getAllSongsFromFirebase(
             onSuccess = { musicList ->
                 val handler = Handler()
                 handler.postDelayed(object : Runnable {

@@ -21,7 +21,7 @@ class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_a, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_song, parent, false)
         return MusicViewHolder(view)
     }
 
@@ -71,7 +71,6 @@ class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.
             }
         }
     }
-
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
         this.onItemClickListener = onItemClickListener
     }
