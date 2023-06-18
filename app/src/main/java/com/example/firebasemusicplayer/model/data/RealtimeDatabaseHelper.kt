@@ -16,35 +16,6 @@ object RealtimeDatabaseHelper {
     private val myRef1 = database.getReference("Singer")
     private val myRef2 = database.getReference("ImageList")
 
-
-    // callback
-//    fun getListUsersFromRealTimeDatabase(
-//        onSuccess: (List<Music>) -> Unit,
-//        onFailure: (Exception) -> Unit
-//    ) {
-//        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                val musicList = mutableListOf<Music>()
-//
-//                var i: Int = 1
-//                for (dataSnapshot in snapshot.children) {
-//                    val music = dataSnapshot.getValue(Music::class.java)
-//                    music?.let {
-//                        musicList.add(it)
-//                    }
-//
-//                    Log.d("YYY", "musicList : " + musicList)
-//                    Log.d("RRR", "snapshot.children : " + snapshot.children)
-//                }
-//                onSuccess(musicList)
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                onFailure(error.toException())
-//            }
-//        })
-//    }
     fun getAllSongsFromFirebase(
         onSuccess: (List<Music>) -> Unit,
         onFailure: (Exception) -> Unit

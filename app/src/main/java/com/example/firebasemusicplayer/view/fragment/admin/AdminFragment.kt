@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.admin
+package com.example.firebasemusicplayer.view.fragment.admin
 
 import android.database.DatabaseUtils
 import android.os.Bundle

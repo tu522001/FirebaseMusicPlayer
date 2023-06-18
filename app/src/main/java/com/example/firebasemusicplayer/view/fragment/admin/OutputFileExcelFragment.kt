@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.admin
+package com.example.firebasemusicplayer.view.fragment.admin
 
 import android.Manifest
 import android.content.pm.PackageManager

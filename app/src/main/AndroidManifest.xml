@@ -26,7 +26,7 @@
 
 
         <activity
-            android:name=".view.user.MainActivity"
+            android:name=".view.activite.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -44,8 +44,11 @@
 <!--        Thêm các thành phần meta-data vào thành phần application cho ID ứng dụng và mã ứng dụng của bạn:-->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
-<!--        Thêm hoạt động cho Facebook, cũng như bộ lọc hoạt động và mục đích cho Tab tùy chỉnh của Chrome bên trong thành phần application của bạn:-->
+        <!--        Thêm hoạt động cho Facebook, cũng như bộ lọc hoạt động và mục đích cho Tab tùy chỉnh của Chrome bên trong thành phần application của bạn:-->
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

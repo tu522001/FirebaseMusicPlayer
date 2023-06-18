@@ -1,71 +1,45 @@
-package com.example.firebasemusicplayer.view.user.home
+package com.example.firebasemusicplayer.view.fragment.home
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.example.firebasemusicplayer.view.listeners.OnClickListenerPlayMusic
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentHomeBinding
 import com.example.firebasemusicplayer.model.entity.Music
 import com.example.firebasemusicplayer.model.entity.Photo
 import com.example.firebasemusicplayer.model.entity.Singer
-import com.example.firebasemusicplayer.model.data.RealtimeDatabaseHelper
 import com.example.firebasemusicplayer.model.entity.User
 import com.example.firebasemusicplayer.view.adapter.MusicAdapter
 import com.example.firebasemusicplayer.view.adapter.PhotoAdapter
 import com.example.firebasemusicplayer.view.adapter.SingerAdapter
+import com.example.firebasemusicplayer.view.listeners.OnClickSingerInformation
 import com.example.firebasemusicplayer.viewmodel.HomeViewModel
-import com.facebook.FacebookSdk.getApplicationContext
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.Cell
-import org.apache.poi.ss.usermodel.Workbook
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.util.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnClickListenerPlayMusic, OnClickSingerInformation {
 
     private val homeViewModel by viewModels<HomeViewModel>()
-    private var recyclerViewMusic: RecyclerView? = null
-    private var recyclerViewSinger: RecyclerView? = null
-
-
-    private var mViewPager2: ViewPager2? = null
-    private var mbottomNavigationView: BottomNavigationView? = null
     private var photoAdapter: PhotoAdapter? = null
     private var musicList = mutableListOf<Music>()
     private var singerList = mutableListOf<Singer>()
     private var photoList = mutableListOf<Photo>()
-    private var  musicAdapter = MusicAdapter(musicList)
-    private var singerAdapter = SingerAdapter(singerList)
-
-
+    private lateinit var  musicAdapter : MusicAdapter
+    private lateinit var singerAdapter : SingerAdapter
     private lateinit var user : User
-    private lateinit var url_avatar: String
-
     private lateinit var binding: FragmentHomeBinding
-
     private var mTimer: Timer? = null
 
     override fun onCreateView(
@@ -77,7 +51,6 @@ class HomeFragment : Fragment() {
         initView()
         observeData()
         initData()
-        onItemClick()
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // onQueryTextSubmit được gọi khi người dùng hoàn tất việc nhập văn bản và muốn tìm kiếm
@@ -89,7 +62,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 musicList!!.clear()
                 return if (newText.isEmpty()) {
-//                    getListUsers()
+                    homeViewModel.fetchAllSongsFromFirebase()
                     true
                 } else {
                     search(newText)
@@ -104,10 +77,6 @@ class HomeFragment : Fragment() {
         val currentUser = firebaseAuth.currentUser
         val userEmail = currentUser?.email
         println(userEmail)
-
-//        var user : User = User()
-
-        // lấy dữ liệu position từ HomeFramgent sang ScreenFragment
 
         val bundle = arguments
 // Kiểm tra nếu bundle không null và có chứa key "Key_url_avatar_facebook"
@@ -139,7 +108,6 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_homeFragment_to_facebookFragment3)
                 }
 
-
             }else if (user.email == "admin123@gmail.com" && user.password == "admin123" ){
                 Glide.with(this)
                     .load(R.drawable.administrator).apply(RequestOptions().override(Target.SIZE_ORIGINAL))
@@ -149,12 +117,13 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-//        photoList = getListImage()
 
         return binding.root
     }
 
     private fun initView() {
+        musicAdapter = MusicAdapter(requireContext(),this,musicList)
+        singerAdapter = SingerAdapter(requireContext(),this,singerList)
         binding.rcvSong?.adapter = musicAdapter
         binding.rcvSinger?.adapter = singerAdapter
 
@@ -182,7 +151,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-        }, 2000, 5000)
+        }, 5000, 5000)
 
     }
 
@@ -218,7 +187,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun search(query: String) {
         val databaseReference = FirebaseDatabase.getInstance().getReference("Song")
 
@@ -240,26 +208,29 @@ class HomeFragment : Fragment() {
                 }
             })
     }
-
-    //     hàm xử lý sự kiện click vào các item ở trong recyclerView để phát nhạc
-    private fun onItemClick() {
-        // position bài hát để phát trong RecyclerView
-        musicAdapter?.setOnItemClickListener(object : MusicAdapter.OnItemClickListener {
-            override fun onClick(position: Int) {
-
-                val musics = musicList!![position]
-                val bundle = Bundle().apply {
-                    putInt("Key_position", position)
-                    putString("Key_song_name", musics.songName)
-                    putString("Key_image_URL", musics.imageURL)
-                    putString("Key_singer_name", musics.singerName)
-                }
-                findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
-
-
-            }
-        })
+    override fun onClickPlayMusic(position: Int) {
+        val musics = musicList!![position]
+        val bundle = Bundle().apply {
+            putInt("Key_position", position)
+            putString("Key_song_name", musics.songName)
+            putString("Key_image_URL", musics.imageURL)
+            putString("Key_singer_name", musics.singerName)
+        }
+        findNavController().navigate(R.id.action_homeFragment_to_screenFragment, bundle)
     }
 
+    override fun onClickSingerInformation(position: Int) {
+        val singer = singerList!![position]
+        Log.d("RRR","Data  HOME_FRAGMENT: singer : "+singer.data+" , height : "+singer.height+" , placeOfBirth : "+singer.placeOfBirth+" , sex : "+singer.sex+" , yearOfOperation : "+singer.singerName)
 
+        val bundle = Bundle().apply {
+            putString("Key_image_URL", singer.imageURL)
+            putString("Key_singer_name", singer.singerName)
+            putString("Key_data", singer.data)
+            putString("Key_height", singer.height)
+            putString("Key_placeOfBirth", singer.placeOfBirth)
+            putString("Key_sex", singer.sex)
+        }
+        findNavController().navigate(R.id.action_homeFragment_to_singerInformationFragment, bundle)
+    }
 }

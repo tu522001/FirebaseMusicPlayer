@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.user.home
+package com.example.firebasemusicplayer.view.fragment.home
 
 import android.app.DownloadManager
 import android.content.Context
@@ -100,16 +100,6 @@ class ScreenFragment : Fragment() {
                     "MyPic/${songsURL}"
                 )
             val downloadId = downloadManager.enqueue(request)
-//            val downloadId = downloadManager.enqueue(request)
-//            listener.onDownloadClick(downloadId)
-//            Log.d("EEE", "downloadId : " + downloadId)
-//
-//            // Thêm hình đã tải vào danh sách
-//            val downloadedImage = DownloadedImage(
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path,
-//                image.url
-//            )
-//            downloadedImages.add(downloadedImage)
         }
 
         return binding.root
@@ -295,6 +285,8 @@ class ScreenFragment : Fragment() {
             }
         )
     }
+
+
 
     private fun startAnimation() {
         val runnable: Runnable = object : Runnable {

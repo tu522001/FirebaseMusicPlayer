@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.user.download
+package com.example.firebasemusicplayer.utils.download
 
 import android.app.DownloadManager
 import android.app.Service

@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.login
+package com.example.firebasemusicplayer.view.fragment.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.firebasemusicplayer.BASE_URL
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSignUpBinding
 import com.example.firebasemusicplayer.viewmodel.SignUpViewModel
@@ -37,7 +38,7 @@ class SignUpFragment : Fragment() {
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://fir-musicplayer-e2d98-default-rtdb.firebaseio.com/")
+        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(BASE_URL)
         binding.btnConfirm.setOnClickListener {
 
             // get data from EditText into String variables

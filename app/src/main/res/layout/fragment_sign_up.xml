@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.login.SignUpFragment">
+    tools:context=".view.fragment.login.SignUpFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,8 +13,8 @@
             android:id="@+id/img_btn_logout"
             android:layout_alignParentEnd="true"
             android:background="@drawable/ic_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/logout" />
         <TextView
             android:id="@+id/tv_SignUp"
@@ -127,13 +127,14 @@
             app:layout_constraintTop_toBottomOf="@+id/edt_email"
             android:autofillHints="" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            app:cornerRadius="12dp"
             android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edt_password"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
             android:backgroundTint="@color/design_default_color_secondary"
             android:text="@string/confirm"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.firebasemusicplayer.view.user.home.HomeFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,10 +22,13 @@
         <action
             android:id="@+id/action_homeFragment_to_adminFragment2"
             app:destination="@id/adminFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_singerInformationFragment"
+            app:destination="@id/singerInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/screenFragment"
-        android:name="com.example.firebasemusicplayer.view.user.home.ScreenFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.home.ScreenFragment"
         android:label="fragment_screen"
         tools:layout="@layout/fragment_screen" >
         <action
@@ -34,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.firebasemusicplayer.view.user.home.SplashFragment"
+        android:name="com.example.firebasemusicplayer.view.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -43,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.firebasemusicplayer.view.login.SignInFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.login.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
 
@@ -67,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.firebasemusicplayer.view.login.SignUpFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.login.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -76,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/facebookFragment3"
-        android:name="com.example.firebasemusicplayer.view.login.FacebookFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.login.FacebookFragment"
         android:label="fragment_facebook"
         tools:layout="@layout/fragment_facebook" >
 
@@ -102,7 +105,7 @@
     <fragment
         tools:layout="@layout/fragment_admin"
         android:id="@+id/adminFragment"
-        android:name="com.example.firebasemusicplayer.view.admin.AdminFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.admin.AdminFragment"
         android:label="AdminFragment" >
         <action
             android:id="@+id/action_adminFragment_to_signInFragment"
@@ -146,7 +149,7 @@
     </fragment>
     <fragment
         android:id="@+id/termsOfServiceFragment"
-        android:name="com.example.firebasemusicplayer.view.user.setting.TermsOfServiceFragment"
+        android:name="com.example.firebasemusicplayer.utils.setting.TermsOfServiceFragment"
         android:label="fragment_terms_of_service"
         tools:layout="@layout/fragment_terms_of_service" >
         <action
@@ -158,7 +161,7 @@
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.example.firebasemusicplayer.view.user.setting.HelpFragment"
+        android:name="com.example.firebasemusicplayer.utils.setting.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" >
         <action
@@ -170,7 +173,7 @@
     </fragment>
     <fragment
         android:id="@+id/securityFragment"
-        android:name="com.example.firebasemusicplayer.view.user.setting.SecurityFragment"
+        android:name="com.example.firebasemusicplayer.utils.setting.SecurityFragment"
         android:label="fragment_security"
         tools:layout="@layout/fragment_security" >
         <action
@@ -182,7 +185,7 @@
     </fragment>
     <fragment
         android:id="@+id/versionFragment"
-        android:name="com.example.firebasemusicplayer.view.user.setting.VersionFragment"
+        android:name="com.example.firebasemusicplayer.utils.setting.VersionFragment"
         android:label="fragment_version"
         tools:layout="@layout/fragment_version" >
         <action
@@ -194,7 +197,7 @@
     </fragment>
     <fragment
         android:id="@+id/outputFileExcelFragment"
-        android:name="com.example.firebasemusicplayer.view.admin.OutputFileExcelFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.admin.OutputFileExcelFragment"
         android:label="fragment_output_file_excel"
         tools:layout="@layout/fragment_output_file_excel" >
         <action
@@ -203,11 +206,16 @@
     </fragment>
     <fragment
         android:id="@+id/addSongFragment"
-        android:name="com.example.firebasemusicplayer.view.admin.AddSongFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.admin.AddSongFragment"
         android:label="fragment_add_song"
         tools:layout="@layout/fragment_add_song" >
         <action
             android:id="@+id/action_addSongFragment_to_adminFragment"
             app:destination="@id/adminFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/singerInformationFragment"
+        android:name="com.example.firebasemusicplayer.view.fragment.home.SingerInformationFragment"
+        android:label="fragment_singer_information"
+        tools:layout="@layout/fragment_singer_information" />
 </navigation>

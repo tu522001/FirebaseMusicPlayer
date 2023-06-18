@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.login
+package com.example.firebasemusicplayer.view.fragment.login
 
 import android.os.Bundle
 import android.util.Log

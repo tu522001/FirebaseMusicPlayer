@@ -1,81 +1,58 @@
 package com.example.firebasemusicplayer.view.adapter
 
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.firebasemusicplayer.view.listeners.OnClickListenerPlayMusic
 import com.example.firebasemusicplayer.R
+import com.example.firebasemusicplayer.databinding.ItemLayoutSongBinding
 import com.example.firebasemusicplayer.model.entity.Music
-//import com.squareup.picasso.Picasso
-
-class MusicAdapter(musicList: List<Music>?) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
-    private val musicList: List<Music>?
-    private var onItemClickListener: OnItemClickListener? = null
-
-    init {
-        this.musicList = musicList
-    }
+class MusicAdapter(var context: Context, var onClickListenerPlayMusic: OnClickListenerPlayMusic, var musicList: List<Music>) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_song, parent, false)
-        return MusicViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+            var itemBinding = ItemLayoutSongBinding.inflate(layoutInflater, parent, false)
+        return MusicViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
-        val music: Music = musicList!![position]
-        holder.tv_id.text = "id: " + music.id
-//        holder.tv_songName.text = "Bài hát : " + music.songName
-//        holder.tv_singerName.text = "Ca sĩ : " + music.singerName
-        holder.tv_songName.text = music.songName
-        holder.tv_singerName.text = music.singerName
-        holder.tv_imageURL.text = "image URL: " + music.imageURL
-        holder.tv_songURL.text = "song URL: " + music.songURL
-
-        /** Sử dụng thư viện Picasso để hiển thị hình ảnh **/
-//        Picasso.with(holder.imageView.context).load(musicList[position].getImage())
-//            .into(holder.imageView)
-
-        /** sử dụng thư viện Glide để hiển thị hình ảnh **/
-        Glide.with(holder.imageView.context).load(musicList.get(position).imageURL).into(holder.imageView)
+        holder.bind(musicList[position])
     }
 
     override fun getItemCount(): Int {
-        return musicList?.size ?: 0
+        return musicList.size
     }
 
-    inner class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tv_id: TextView
-        val tv_songName: TextView
-        val tv_singerName: TextView
-        val tv_imageURL: TextView
-        val tv_songURL: TextView
-        val imageView : ImageView
+    inner class MusicViewHolder(var itemBinding: ItemLayoutSongBinding ) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(music: Music) {
+            itemBinding.tvId.text = music.id.toString()
+            itemBinding.tvSongName.text = music.songName
+            itemBinding.tvSingerName.text = music.singerName
 
-
-        init {
-            tv_id = itemView.findViewById(R.id.tv_id)
-            tv_songName = itemView.findViewById(R.id.tv_songName)
-            tv_singerName = itemView.findViewById(R.id.tv_singerName)
-            tv_imageURL = itemView.findViewById(R.id.tv_imageURL)
-            tv_songURL = itemView.findViewById(R.id.tv_songURL)
-            imageView = itemView.findViewById(R.id.imageView)
-
-            itemView.setOnClickListener {
-                if (onItemClickListener != null) {
-                    onItemClickListener!!.onClick(adapterPosition)
+            when(music.id){
+                1-> {
+                    itemBinding.tvId.setTextColor(ContextCompat.getColor(context,R.color.red))
+                }
+                2->{
+                    itemBinding.tvId.setTextColor(ContextCompat.getColor(context,R.color.green))
+                }
+                3->{
+                    itemBinding.tvId.setTextColor(ContextCompat.getColor(context,R.color.turquoise))
+                }
+                else->{
+                    itemBinding.tvId.setTextColor(ContextCompat.getColor(context,R.color.black))
                 }
             }
+            Glide.with(itemBinding.imgSong.context).load(music.imageURL).into(itemBinding.imgSong)
+                itemBinding.itemLayout.setOnClickListener{
+                    onClickListenerPlayMusic.onClickPlayMusic(position)
+                }
+
         }
     }
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
-        this.onItemClickListener = onItemClickListener
-    }
 
-    interface OnItemClickListener {
-        fun onClick(position: Int)
-    }
 }

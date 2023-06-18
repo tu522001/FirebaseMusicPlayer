@@ -1,4 +1,4 @@
-package com.example.firebasemusicplayer.view.user.home
+package com.example.firebasemusicplayer.view.splash
 
 import android.os.Bundle
 import android.os.Handler

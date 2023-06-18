@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.user.setting.VersionFragment">
+    tools:context=".utils.setting.VersionFragment">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/ConstraintLayout"

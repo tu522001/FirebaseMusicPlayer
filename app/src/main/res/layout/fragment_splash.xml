@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".view.user.home.SplashFragment">
+    tools:context=".view.splash.SplashFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
