@@ -63,9 +63,13 @@ class HomeFragment : Fragment(), OnClickListenerPlayMusic, OnClickSingerInformat
                 musicList!!.clear()
                 return if (newText.isEmpty()) {
                     homeViewModel.fetchAllSongsFromFirebase()
+                    binding.rcvSinger.visibility = View.VISIBLE
+                    binding.tvTopSinger.visibility = View.VISIBLE
                     true
                 } else {
                     search(newText)
+                    binding.rcvSinger.visibility = View.GONE
+                    binding.tvTopSinger.visibility = View.GONE
                     true
                 }
             }
@@ -229,6 +233,7 @@ class HomeFragment : Fragment(), OnClickListenerPlayMusic, OnClickSingerInformat
             putString("Key_data", singer.data)
             putString("Key_height", singer.height)
             putString("Key_placeOfBirth", singer.placeOfBirth)
+            putString("Key_yearOfOperation",singer.yearOfOperation)
             putString("Key_sex", singer.sex)
         }
         findNavController().navigate(R.id.action_homeFragment_to_singerInformationFragment, bundle)

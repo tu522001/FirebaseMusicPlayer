@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.firebasemusicplayer.R
 import com.example.firebasemusicplayer.databinding.FragmentSingerInformationBinding
@@ -17,6 +18,7 @@ class SingerInformationFragment : Fragment() {
     private lateinit var data : String
     private lateinit var height : String
     private lateinit var placeOfBirth : String
+    private lateinit var yearOfOperation : String
     private lateinit var sex : String
 
     private lateinit var binding: FragmentSingerInformationBinding
@@ -29,14 +31,20 @@ class SingerInformationFragment : Fragment() {
 
         onClickSingerInformation()
         initView()
-        Log.d("SINGER","imageURL : "+imageURL+ ", singerName :  "+singerName+" , data : "+data)
         return binding.root
     }
 
     private fun initView() {
-//        Glide.with(binding.imgSong.context).load(imageURL).into(binding.imgSong)
-        binding.tvData.text = data.toString()
-
+        binding.btnBack.setOnClickListener{
+            findNavController().popBackStack()
+        }
+        Glide.with(binding.imgSong.context).load(imageURL).into(binding.imgSong)
+        binding.tvData.text = "- Ngày sinh : "+data
+        binding.tvHeight.text = "- Chiều cao : "+height
+        binding.tvPlaceOfBirth.text = "- Quê quán : "+placeOfBirth
+        binding.tvYearOfOperation.text = "- Hoạt động từ năm : "+yearOfOperation
+        binding.tvSex.text = "- Giới tính : "+sex
+        binding.tvSingerName.text = singerName
     }
 
     private fun onClickSingerInformation() {
@@ -48,6 +56,7 @@ class SingerInformationFragment : Fragment() {
         data = bundle?.getString("Key_data")!!
         height = bundle?.getString("Key_height")!!
         placeOfBirth = bundle?.getString("Key_placeOfBirth")!!
+        yearOfOperation = bundle?.getString("Key_yearOfOperation")!!
         sex = bundle?.getString("Key_sex")!!
 
     }
